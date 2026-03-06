@@ -41,6 +41,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Close menu on route change (handles cases where location changes)
   useEffect(() => {
     setMobileOpen(false);
     setActiveDropdown(null);
@@ -74,6 +75,15 @@ export default function Navbar() {
 
   const isActive = (path: string) => location.pathname === path;
 
+  // ── NEW: close mobile menu and navigate ──
+  // Called on every mobile link/anchor click so the menu shuts
+  // regardless of whether the route actually changes (e.g. tapping
+  // the current page).
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+    setActiveDropdown(null);
+  };
+
   return (
     <header
       ref={headerRef}
@@ -105,7 +115,6 @@ export default function Navbar() {
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
           {navLinks.map(link =>
             link.dropdown ? (
-              // Hover reveals dropdown, clicking the label navigates to /platforms
               <div
                 key={link.path}
                 className="relative"
@@ -131,7 +140,6 @@ export default function Navbar() {
                   )}
                 </Link>
 
-                {/* Dropdown panel — also keep open when hovering the panel itself */}
                 <div
                   role="menu"
                   onMouseEnter={() => handleMouseEnter(link.path)}
@@ -221,10 +229,11 @@ export default function Navbar() {
               <li key={link.path}>
                 {link.dropdown ? (
                   <>
-                    {/* Mobile: link text navigates, chevron button toggles dropdown */}
+                    {/* Mobile: link text navigates + closes menu, chevron toggles dropdown */}
                     <div className="flex items-center">
                       <Link
                         to={link.path}
+                        onClick={closeMobileMenu}
                         className={cn(
                           'flex-1 rounded-xl px-4 py-3 text-base font-semibold transition-colors',
                           isActive(link.path) ? 'text-yellow-400' : 'text-white/80 hover:text-white'
@@ -251,12 +260,25 @@ export default function Navbar() {
                           return (
                             <li key={item.path}>
                               {isExt ? (
-                                <a href={item.path} target="_blank" rel="noopener noreferrer" className={cls}>
+                                // External links open a new tab — close menu too
+                                <a
+                                  href={item.path}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={closeMobileMenu}
+                                  className={cls}
+                                >
                                   {item.title}
                                   <ExternalLink className="h-3 w-3 opacity-40" />
                                 </a>
                               ) : (
-                                <Link to={item.path} className={cls}>{item.title}</Link>
+                                <Link
+                                  to={item.path}
+                                  onClick={closeMobileMenu}
+                                  className={cls}
+                                >
+                                  {item.title}
+                                </Link>
                               )}
                             </li>
                           );
@@ -267,6 +289,7 @@ export default function Navbar() {
                 ) : (
                   <Link
                     to={link.path}
+                    onClick={closeMobileMenu}
                     className={cn(
                       'flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold transition-colors',
                       isActive(link.path)
@@ -288,6 +311,7 @@ export default function Navbar() {
         <div className="shrink-0 border-t border-white/10 p-4">
           <Link
             to="/careers"
+            onClick={closeMobileMenu}
             className="flex w-full items-center justify-center rounded-xl bg-yellow-400 py-3.5 text-sm font-bold text-blue-950 transition-colors hover:bg-yellow-300"
           >
             Careers
