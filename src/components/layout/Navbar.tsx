@@ -15,12 +15,12 @@ const navLinks: NavLink[] = [
     title: 'Platforms',
     path: '/platforms',
     dropdown: [
-      { title: 'Mesaj',        path: 'https://mesaj.cloud'         },
-      { title: 'Turnaj',       path: 'https://turnaj.mobi'         },
-      { title: 'Billmagic',    path: 'https://billmagic.xyz'       },
-      { title: 'Bingebay',     path: 'https://bingebay.tv/'        },
-      { title: 'Finsight',     path: 'https://finsightngr.online/' },
-      { title: 'Venix Cloud', path: 'https://www.venix.cloud/'       },
+      { title: 'Mesaj',       path: 'https://mesaj.cloud'          },
+      { title: 'Turnaj',      path: 'https://turnaj.mobi'          },
+      { title: 'Billmagic',   path: 'https://billmagic.xyz'        },
+      { title: 'Bingebay',    path: 'https://bingebay.tv/'         },
+      { title: 'Finsight',    path: 'https://finsightngr.online/'  },
+      { title: 'Venix Cloud', path: 'https://www.venix.cloud/'     },
     ],
   },
   { title: 'Contact', path: '/contact' },
@@ -30,8 +30,9 @@ export default function Navbar() {
   const [mobileOpen,     setMobileOpen]     = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled,       setScrolled]       = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
-  const location  = useLocation();
+  const headerRef  = useRef<HTMLElement>(null);
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const location   = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -59,6 +60,15 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
+  const handleMouseEnter = (path: string) => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    setActiveDropdown(path);
+  };
+
+  const handleMouseLeave = () => {
+    hoverTimer.current = setTimeout(() => setActiveDropdown(null), 150);
+  };
+
   const toggleDropdown = (path: string) =>
     setActiveDropdown(prev => prev === path ? null : path);
 
@@ -84,7 +94,7 @@ export default function Navbar() {
 
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
-        {/* ── LOGO — bare, forced larger ── */}
+        {/* ── LOGO ── */}
         <Link to="/" aria-label="Venix home" className="relative z-10 flex shrink-0 items-center">
           <div className="scale-150 origin-left brightness-0 invert">
             <Logo size="xl" />
@@ -95,15 +105,19 @@ export default function Navbar() {
         <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
           {navLinks.map(link =>
             link.dropdown ? (
-              <div key={link.path} className="relative">
-                <button
-                  aria-haspopup="true"
-                  aria-expanded={activeDropdown === link.path}
-                  onClick={() => toggleDropdown(link.path)}
+              // Hover reveals dropdown, clicking the label navigates to /platforms
+              <div
+                key={link.path}
+                className="relative"
+                onMouseEnter={() => handleMouseEnter(link.path)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Link
+                  to={link.path}
                   className={cn(
-                    'flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold transition-all duration-150',
-                    activeDropdown === link.path
-                      ? 'bg-white/10 text-white'
+                    'relative flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold transition-all duration-150',
+                    isActive(link.path)
+                      ? 'text-white font-bold'
                       : 'text-white/75 hover:bg-white/10 hover:text-white'
                   )}
                 >
@@ -112,10 +126,16 @@ export default function Navbar() {
                     'h-3.5 w-3.5 text-white/40 transition-transform duration-200',
                     activeDropdown === link.path && 'rotate-180'
                   )} />
-                </button>
+                  {isActive(link.path) && (
+                    <span className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-white" />
+                  )}
+                </Link>
 
+                {/* Dropdown panel — also keep open when hovering the panel itself */}
                 <div
                   role="menu"
+                  onMouseEnter={() => handleMouseEnter(link.path)}
+                  onMouseLeave={handleMouseLeave}
                   className={cn(
                     'absolute left-0 top-[calc(100%+8px)] w-52 overflow-hidden rounded-2xl border border-white/10 bg-blue-950 py-1.5 shadow-2xl shadow-blue-950/60',
                     'transition-all duration-200',
@@ -201,17 +221,28 @@ export default function Navbar() {
               <li key={link.path}>
                 {link.dropdown ? (
                   <>
-                    <button
-                      aria-expanded={activeDropdown === link.path}
-                      onClick={() => toggleDropdown(link.path)}
-                      className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-white/80 transition-colors hover:bg-white/8 hover:text-white"
-                    >
-                      {link.title}
-                      <ChevronDown className={cn(
-                        'h-4 w-4 text-yellow-400/60 transition-transform duration-200',
-                        activeDropdown === link.path && 'rotate-180'
-                      )} />
-                    </button>
+                    {/* Mobile: link text navigates, chevron button toggles dropdown */}
+                    <div className="flex items-center">
+                      <Link
+                        to={link.path}
+                        className={cn(
+                          'flex-1 rounded-xl px-4 py-3 text-base font-semibold transition-colors',
+                          isActive(link.path) ? 'text-yellow-400' : 'text-white/80 hover:text-white'
+                        )}
+                      >
+                        {link.title}
+                      </Link>
+                      <button
+                        aria-expanded={activeDropdown === link.path}
+                        onClick={() => toggleDropdown(link.path)}
+                        className="rounded-xl px-3 py-3 text-white/50 transition-colors hover:bg-white/8 hover:text-yellow-400"
+                      >
+                        <ChevronDown className={cn(
+                          'h-4 w-4 transition-transform duration-200',
+                          activeDropdown === link.path && 'rotate-180'
+                        )} />
+                      </button>
+                    </div>
                     {activeDropdown === link.path && (
                       <ul className="ml-4 mt-0.5 space-y-0.5 border-l-2 border-yellow-400/25 pl-3">
                         {link.dropdown.map(item => {

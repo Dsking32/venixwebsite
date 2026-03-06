@@ -11,6 +11,7 @@ import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
 import ServicesPage from './pages/ServicesPage';
 import CareersPage from './pages/CareersPage';
+import PlatformsPage from './pages/PlatformsPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
 import CompliancePage from './pages/CompliancePage';
@@ -43,6 +44,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/careers" element={<CareersPage />} />
+              <Route path="/platforms" element={<PlatformsPage />} />
               <Route path="/privacy" element={<PrivacyPolicyPage />} />
               <Route path="/terms" element={<TermsOfUsePage />} />
               <Route path="/compliance" element={<CompliancePage />} />
