@@ -1,0 +1,3193 @@
+﻿import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import BusinessPage from './pages/BusinessPage';
+import PersonalPage from './pages/PersonalPage';
+import ContactPage from './pages/ContactPage';
+import BlogPage from './pages/BlogPage';
+import Layout from './components/layout/Layout';
+import ServicesPage from './pages/ServicesPage';
+import CareersPage from './pages/CareersPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfUsePage from './pages/TermsOfUsePage';
+import CompliancePage from './pages/CompliancePage';
+import SplashScreen from './components/SplashScreen';
+
+// ScrollToTop component to reset scroll position on route change
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  return (
+    <>
+      {showSplash ? (
+        <SplashScreen onFinish={() => setShowSplash(false)} />
+      ) : (
+        <>
+          <ScrollToTop />
+          <Layout>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/business" element={<BusinessPage />} />
+              <Route path="/personal" element={<PersonalPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/careers" element={<CareersPage />} />
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/terms" element={<TermsOfUsePage />} />
+              <Route path="/compliance" element={<CompliancePage />} />
+            </Routes>
+          </Layout>
+        </>
+      )}
+    </>
+  );
+}
+
+export default App;
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply font-sans text-gray-800 bg-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl leading-snug;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl leading-snug;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 shadow-btn hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary-500 border border-primary-500 hover:bg-primary-50 focus:ring-primary-500;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-gray-900 hover:bg-accent-600 focus:ring-accent-500 shadow-btn hover:shadow-md;
+  }
+
+  .nav-link {
+    @apply text-gray-700 hover:text-primary-500 font-medium transition-colors;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-soft hover:shadow-card transition-shadow duration-300 overflow-hidden;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply text-center mb-12;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500;
+  }
+}
+
+/* Custom animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- â”€â”€ Favicon & App Icons â”€â”€ -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png" />
+    <meta name="theme-color" content="#1E3A8A" />
+
+    <!-- â”€â”€ Primary SEO â”€â”€ -->
+    <title>Venix Partners Limited â€” Digital Infrastructure for Africa</title>
+    <meta name="description" content="Venix Partners Limited is an NCC-licensed digital infrastructure company building enterprise telecom, fintech, and platform solutions across Nigeria and Africa." />
+    <meta name="keywords" content="Venix Partners, VAS operator Nigeria, NCC licensed, telecom infrastructure, fintech Nigeria, enterprise digital platforms, Venix Cloud, Mesaj, BingeBay, Turnaj, FinSight, bulk SMS Nigeria, digital Africa" />
+    <meta name="author" content="Venix Partners Limited" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://venixpartners.com" />
+
+    <!-- â”€â”€ Open Graph (Facebook, WhatsApp, LinkedIn) â”€â”€ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://venixpartners.com" />
+    <meta property="og:title" content="Venix Partners Limited â€” Digital Infrastructure for Africa" />
+    <meta property="og:description" content="NCC-licensed digital infrastructure company powering enterprise telecom, fintech, and digital platforms across Nigeria and Africa." />
+    <meta property="og:image" content="https://venixpartners.com/images/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Venix Partners Limited" />
+    <meta property="og:locale" content="en_NG" />
+
+    <!-- â”€â”€ Twitter / X Card â”€â”€ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://venixpartners.com" />
+    <meta name="twitter:title" content="Venix Partners Limited â€” Digital Infrastructure for Africa" />
+    <meta name="twitter:description" content="NCC-licensed digital infrastructure company powering enterprise telecom, fintech, and digital platforms across Nigeria and Africa." />
+    <meta name="twitter:image" content="https://venixpartners.com/images/og-image.png" />
+
+    <!-- â”€â”€ Geo & Business â”€â”€ -->
+    <meta name="geo.region" content="NG-LA" />
+    <meta name="geo.placename" content="Lagos, Nigeria" />
+    <meta name="geo.position" content="6.5244;3.3792" />
+    <meta name="ICBM" content="6.5244, 3.3792" />
+
+    <!-- â”€â”€ Structured Data (JSON-LD) â”€â”€ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Venix Partners Limited",
+      "url": "https://venixpartners.com",
+      "logo": "https://venixpartners.com/images/logo.png",
+      "description": "NCC-licensed digital infrastructure company building enterprise telecom, fintech, and platform solutions across Nigeria and Africa.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "35, Yesufu Sanusi Street, Off Adeniran Ogunsanya",
+        "addressLocality": "Surulere, Lagos",
+        "addressCountry": "NG"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+234-802-593-4298",
+        "contactType": "customer service",
+        "email": "hello@venixpartners.com",
+        "availableLanguage": "English"
+      },
+      "sameAs": [
+        "https://www.instagram.com/venixpartners",
+        "https://www.linkedin.com/company/venix-partners-limited/"
+      ]
+    }
+    </script>
+
+    <!-- â”€â”€ Font Preconnect â”€â”€ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- â”€â”€ Performance â”€â”€ -->
+    <link rel="dns-prefetch" href="https://images.pexels.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import { setupScrollAnimations } from '../../lib/utils';
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
+  const location   = useLocation();
+  const mainRef    = useRef<HTMLElement>(null);
+
+  // Re-run scroll animations on every route change
+  useEffect(() => {
+    setupScrollAnimations();
+  }, [location.pathname]);
+
+  // Scroll to top on route change (smooth feels better than instant)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location.pathname]);
+
+  return (
+    <div className="flex min-h-screen flex-col bg-white">
+      <Navbar />
+
+      <main
+        ref={mainRef}
+        id="main-content"
+        // Offset for the fixed navbar height (~64â€“72px).
+        // Pages that want a full-bleed hero can opt out with a negative top margin.
+        className="flex-grow"
+        tabIndex={-1}
+      >
+        {children}
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react';
+import Logo from '../ui/Logo';
+import { cn } from '../../lib/utils';
+
+interface DropdownItem { title: string; path: string; }
+interface NavLink      { title: string; path: string; dropdown?: DropdownItem[]; }
+
+const navLinks: NavLink[] = [
+  { title: 'Home',     path: '/'        },
+  { title: 'About Us', path: '/about'   },
+  { title: 'Services', path: '/services'},
+  {
+    title: 'Platforms',
+    path: '/platforms',
+    dropdown: [
+      { title: 'Mesaj',        path: 'https://mesaj.cloud'         },
+      { title: 'Turnaj',       path: 'https://turnaj.mobi'         },
+      { title: 'Billmagic',    path: 'https://billmagic.xyz'       },
+      { title: 'Bingebay',     path: 'https://bingebay.tv/'        },
+      { title: 'Finsight',     path: 'https://finsightngr.online/' },
+      { title: 'Venix Cloud', path: 'https://www.venix.cloud/'       },
+    ],
+  },
+  { title: 'Contact', path: '/contact' },
+];
+
+export default function Navbar() {
+  const [mobileOpen,     setMobileOpen]     = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [scrolled,       setScrolled]       = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const location  = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setActiveDropdown(null);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handler = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node))
+        setActiveDropdown(null);
+    };
+    document.addEventListener('pointerdown', handler);
+    return () => document.removeEventListener('pointerdown', handler);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
+  const toggleDropdown = (path: string) =>
+    setActiveDropdown(prev => prev === path ? null : path);
+
+  const isActive = (path: string) => location.pathname === path;
+
+  return (
+    <header
+      ref={headerRef}
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out',
+        scrolled
+          ? 'bg-blue-950/96 backdrop-blur-md shadow-xl shadow-blue-950/40 py-2'
+          : 'bg-transparent py-5'
+      )}
+    >
+      {/* Bottom border on scroll */}
+      <div className={cn(
+        'absolute bottom-0 inset-x-0 h-px transition-opacity duration-500',
+        scrolled
+          ? 'opacity-100 bg-gradient-to-r from-yellow-400/60 via-yellow-400/20 to-transparent'
+          : 'opacity-0'
+      )} />
+
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+
+        {/* â”€â”€ LOGO â€” bare, forced larger â”€â”€ */}
+        <Link to="/" aria-label="Venix home" className="relative z-10 flex shrink-0 items-center">
+          <div className="scale-150 origin-left brightness-0 invert">
+            <Logo size="xl" />
+          </div>
+        </Link>
+
+        {/* â”€â”€ Desktop nav â”€â”€ */}
+        <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
+          {navLinks.map(link =>
+            link.dropdown ? (
+              <div key={link.path} className="relative">
+                <button
+                  aria-haspopup="true"
+                  aria-expanded={activeDropdown === link.path}
+                  onClick={() => toggleDropdown(link.path)}
+                  className={cn(
+                    'flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold transition-all duration-150',
+                    activeDropdown === link.path
+                      ? 'bg-white/10 text-white'
+                      : 'text-white/75 hover:bg-white/10 hover:text-white'
+                  )}
+                >
+                  {link.title}
+                  <ChevronDown className={cn(
+                    'h-3.5 w-3.5 text-white/40 transition-transform duration-200',
+                    activeDropdown === link.path && 'rotate-180'
+                  )} />
+                </button>
+
+                <div
+                  role="menu"
+                  className={cn(
+                    'absolute left-0 top-[calc(100%+8px)] w-52 overflow-hidden rounded-2xl border border-white/10 bg-blue-950 py-1.5 shadow-2xl shadow-blue-950/60',
+                    'transition-all duration-200',
+                    activeDropdown === link.path
+                      ? 'pointer-events-auto translate-y-0 opacity-100'
+                      : 'pointer-events-none -translate-y-2 opacity-0'
+                  )}
+                >
+                  <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-yellow-400 to-yellow-400/0" />
+                  {link.dropdown.map(item => {
+                    const isExt = item.path.startsWith('http');
+                    const cls = 'group flex items-center justify-between px-4 py-2.5 text-sm text-white/65 hover:bg-yellow-400/10 hover:text-yellow-400 transition-colors duration-150';
+                    return isExt ? (
+                      <a key={item.path} href={item.path} target="_blank" rel="noopener noreferrer" role="menuitem" className={cls}>
+                        {item.title}
+                        <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-60" />
+                      </a>
+                    ) : (
+                      <Link key={item.path} to={item.path} role="menuitem" className={cls}>
+                        {item.title}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'relative rounded-lg px-3.5 py-2 text-sm font-semibold transition-all duration-150',
+                  isActive(link.path)
+                    ? 'text-white font-bold'
+                    : 'text-white/75 hover:bg-white/10 hover:text-white'
+                )}
+              >
+                {link.title}
+                {isActive(link.path) && (
+                  <span className="absolute bottom-1 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-white" />
+                )}
+              </Link>
+            )
+          )}
+        </nav>
+
+        {/* â”€â”€ Desktop CTA â”€â”€ */}
+        <div className="hidden items-center gap-3 md:flex">
+          <Link
+            to="/careers"
+            className="rounded-lg border border-white/30 px-5 py-2 text-sm font-bold text-white transition-all duration-200 hover:border-white/60 hover:bg-white/10 active:scale-[0.97]"
+          >
+            Careers
+          </Link>
+        </div>
+
+        {/* â”€â”€ Mobile hamburger â”€â”€ */}
+        <button
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
+          onClick={() => setMobileOpen(v => !v)}
+          className="relative z-10 rounded-lg p-2 text-white/80 transition-colors hover:bg-white/10 md:hidden"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {/* â”€â”€ Mobile menu â”€â”€ */}
+      <div
+        id="mobile-nav"
+        aria-hidden={!mobileOpen}
+        className={cn(
+          'fixed inset-x-0 top-0 z-40 flex flex-col bg-blue-950 transition-transform duration-300 ease-in-out md:hidden pt-[88px]',
+          mobileOpen ? 'translate-x-0' : 'translate-x-full'
+        )}
+        style={{ height: '100dvh' }}
+      >
+        <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-yellow-400 via-yellow-300 to-transparent" />
+
+        <nav className="flex-1 overflow-y-auto px-4 py-4">
+          <ul className="space-y-0.5">
+            {navLinks.map(link => (
+              <li key={link.path}>
+                {link.dropdown ? (
+                  <>
+                    <button
+                      aria-expanded={activeDropdown === link.path}
+                      onClick={() => toggleDropdown(link.path)}
+                      className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-base font-semibold text-white/80 transition-colors hover:bg-white/8 hover:text-white"
+                    >
+                      {link.title}
+                      <ChevronDown className={cn(
+                        'h-4 w-4 text-yellow-400/60 transition-transform duration-200',
+                        activeDropdown === link.path && 'rotate-180'
+                      )} />
+                    </button>
+                    {activeDropdown === link.path && (
+                      <ul className="ml-4 mt-0.5 space-y-0.5 border-l-2 border-yellow-400/25 pl-3">
+                        {link.dropdown.map(item => {
+                          const isExt = item.path.startsWith('http');
+                          const cls = 'flex items-center justify-between rounded-lg px-3 py-2.5 text-sm text-white/55 transition-colors hover:bg-white/8 hover:text-yellow-400';
+                          return (
+                            <li key={item.path}>
+                              {isExt ? (
+                                <a href={item.path} target="_blank" rel="noopener noreferrer" className={cls}>
+                                  {item.title}
+                                  <ExternalLink className="h-3 w-3 opacity-40" />
+                                </a>
+                              ) : (
+                                <Link to={item.path} className={cls}>{item.title}</Link>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className={cn(
+                      'flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold transition-colors',
+                      isActive(link.path)
+                        ? 'text-yellow-400'
+                        : 'text-white/80 hover:bg-white/8 hover:text-white'
+                    )}
+                  >
+                    {link.title}
+                    {isActive(link.path) && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-yellow-400" />
+                    )}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="shrink-0 border-t border-white/10 p-4">
+          <Link
+            to="/careers"
+            className="flex w-full items-center justify-center rounded-xl bg-yellow-400 py-3.5 text-sm font-bold text-blue-950 transition-colors hover:bg-yellow-300"
+          >
+            Careers
+          </Link>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div
+          aria-hidden="true"
+          className="fixed inset-0 z-30 bg-blue-950/50 backdrop-blur-sm md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+    </header>
+  );
+}
+import {
+  Instagram,
+  Linkedin,
+  MapPin,
+  Phone,
+  Mail,
+  ArrowUpRight,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Container from '../ui/Container';
+import Logo from '../ui/Logo';
+
+// â”€â”€â”€ Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+const socialLinks = [
+  { href: 'https://www.instagram.com/venixpartners?igsh=MTk1cWdva3loN3Fpdw==', icon: Instagram, label: 'Instagram' },
+  { href: 'https://www.linkedin.com/company/venix-partners-limited/',           icon: Linkedin,  label: 'LinkedIn'  },
+];
+
+const platforms = [
+  { title: 'Mesaj',       href: 'https://mesaj.cloud'          },
+  { title: 'Turnaj',      href: 'https://turnaj.mobi'          },
+  { title: 'Billmagic',   href: 'https://billmagic.xyz'        },
+  { title: 'Bingebay',    href: 'https://bingebay.tv/'         },
+  { title: 'Finsight',    href: 'https://finsightngr.online/'  },
+  { title: 'Venix Cloud', href: 'https://www.venix.cloud/'     },
+];
+
+const quickLinks = [
+  { title: 'Home',     to: '/'        },
+  { title: 'About Us', to: '/about'   },
+  { title: 'Services', to: '/services'},
+  { title: 'Careers',  to: '/careers' },
+  { title: 'Contact',  to: '/contact' },
+];
+
+const phoneNumbers = [
+  '+234 812 445 7343',
+  '+234 909 999 1491',
+  '+234 813 283 1347',
+  '+234 905 587 0986',
+];
+
+// Legal links now use React Router paths matching your routes exactly
+const legalLinks = [
+  { title: 'Privacy Policy', to: '/privacy'    },
+  { title: 'Terms of Use',   to: '/terms'      },
+  { title: 'Compliance',     to: '/compliance' },
+];
+
+// â”€â”€â”€ Sub-component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+function ColLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mb-5 flex items-center gap-2.5">
+      <span className="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-400">
+        {children}
+      </span>
+      <span className="h-px flex-1 bg-gradient-to-r from-yellow-400/30 to-transparent" />
+    </div>
+  );
+}
+
+// â”€â”€â”€ Footer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+export default function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="relative overflow-hidden text-white" style={{ background: '#1E3A8A' }}>
+
+      {/* Subtle dot-grid texture */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(251,191,36,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(251,191,36,0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: '56px 56px',
+        }}
+      />
+
+      {/* Yellow top accent line */}
+      <div className="h-[3px] w-full bg-gradient-to-r from-yellow-400 via-yellow-300 to-transparent" />
+
+      {/* â”€â”€ Main grid â”€â”€ */}
+      <Container>
+        <div className="relative z-10 grid grid-cols-1 gap-10 py-16 md:grid-cols-2 lg:grid-cols-12 xl:gap-14">
+
+          {/* Brand â€” col-span-3 */}
+          <div className="lg:col-span-3">
+            <div className="mb-5">
+              <Logo />
+            </div>
+            <p className="mb-6 max-w-[220px] text-sm leading-relaxed text-white/55">
+              Telecom-integrated digital infrastructure â€” building secure, scalable, and
+              enterprise-grade platforms across Africa.
+            </p>
+
+            {/* NCC badge */}
+            <div className="mb-6 inline-flex items-center gap-2.5 rounded-lg border border-yellow-400/25 bg-yellow-400/8 px-3 py-2">
+              <span className="text-sm">ðŸ›ï¸</span>
+              <div>
+                <p className="text-[9px] font-bold uppercase tracking-widest text-yellow-400">NCC Licensed</p>
+                <p className="text-[11px] text-white/50">VAS Operator Â· Nigeria</p>
+              </div>
+            </div>
+
+            {/* Socials */}
+            <div className="flex items-center gap-2">
+              {socialLinks.map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center border border-white/15 text-white/50 transition-all duration-200 hover:border-yellow-400 hover:bg-yellow-400 hover:text-blue-950"
+                >
+                  <Icon size={14} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Company â€” col-span-2 */}
+          <div className="lg:col-span-2">
+            <ColLabel>Company</ColLabel>
+            <ul className="space-y-2.5">
+              {quickLinks.map(({ title, to }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="group inline-flex items-center gap-1.5 text-[13px] text-white/55 transition-colors duration-150 hover:text-yellow-400"
+                  >
+                    <span className="h-px w-0 bg-yellow-400 transition-all duration-200 group-hover:w-3" />
+                    {title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Platforms â€” col-span-2 */}
+          <div className="lg:col-span-2">
+            <ColLabel>Platforms</ColLabel>
+            <ul className="space-y-2.5">
+              {platforms.map(({ title, href }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-[13px] text-white/55 transition-colors duration-150 hover:text-yellow-400"
+                  >
+                    {title}
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-opacity group-hover:opacity-70" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Phone â€” col-span-2 */}
+          <div className="lg:col-span-2">
+            <ColLabel>Phone</ColLabel>
+            <div className="flex items-start gap-3">
+              <Phone size={13} className="mt-0.5 flex-shrink-0 text-yellow-400" />
+              <div className="flex flex-col gap-2">
+                {phoneNumbers.map((n) => (
+                  <a
+                    key={n}
+                    href={`tel:${n.replace(/\s/g, '')}`}
+                    className="text-[13px] text-white/55 transition-colors hover:text-yellow-400"
+                  >
+                    {n}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Contact & Address â€” col-span-3 */}
+          <div className="lg:col-span-3">
+            <ColLabel>Contact</ColLabel>
+
+            <div className="mb-5 flex items-center gap-3">
+              <Mail size={13} className="flex-shrink-0 text-yellow-400" />
+              <a
+                href="mailto:hello@venixpartners.com"
+                className="text-[13px] text-white/55 transition-colors hover:text-yellow-400"
+              >
+                hello@venixpartners.com
+              </a>
+            </div>
+
+            {/* Hours card */}
+            <div className="mb-5 border border-white/10 bg-white/5 p-4">
+              <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.15em] text-yellow-400">
+                Business Hours
+              </p>
+              <div className="mb-1 flex items-center gap-2 text-[13px] text-white">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                Open Today
+              </div>
+              <p className="text-[12px] text-white/45">Mon â€“ Fri &nbsp;Â·&nbsp; 9:00 AM â€“ 5:00 PM</p>
+            </div>
+
+            {/* Address */}
+            <div className="flex items-start gap-3">
+              <MapPin size={13} className="mt-0.5 flex-shrink-0 text-yellow-400" />
+              <address className="not-italic text-[13px] leading-relaxed text-white/55">
+                35, Yesufu Sanusi Street<br />
+                Off Adeniran Ogunsanya<br />
+                Surulere, Lagos, Nigeria
+              </address>
+            </div>
+          </div>
+
+        </div>
+      </Container>
+
+      {/* Divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+
+      {/* â”€â”€ Bottom bar â”€â”€ */}
+      <Container>
+        <div className="relative z-10 flex flex-col items-center justify-between gap-3 py-5 sm:flex-row">
+          <p className="text-[12px] text-white/30">
+            Â© {year} Venix Partners Limited. All rights reserved.
+          </p>
+
+          {/* Legal links â€” now using React Router <Link> so they work as SPA routes */}
+          <div className="flex items-center gap-5">
+            {legalLinks.map(({ title, to }) => (
+              <Link
+                key={to}
+                to={to}
+                className="group relative text-[12px] text-white/30 transition-colors duration-200 hover:text-yellow-400"
+              >
+                {title}
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-yellow-400 transition-all duration-200 group-hover:w-full" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Container>
+
+    </footer>
+  );
+}
+
+=== AboutPage.tsx ===
+// â”€â”€â”€ AboutPage.tsx â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../components/ui/Container';
+
+function useReveal(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('_vis', e.isIntersecting)),
+      { threshold: 0.1 }
+    );
+    ref.current?.querySelectorAll('._r,._rl,._rr').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [ref]);
+}
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  ._r  { opacity:0; transform:translateY(32px);  transition:opacity .75s ease,transform .75s ease; }
+  ._rl { opacity:0; transform:translateX(-52px); transition:opacity .8s  ease,transform .8s  ease; }
+  ._rr { opacity:0; transform:translateX( 52px); transition:opacity .8s  ease,transform .8s  ease; }
+  ._r._vis,._rl._vis,._rr._vis { opacity:1; transform:none; }
+  ._d1{transition-delay:.1s} ._d2{transition-delay:.2s} ._d3{transition-delay:.3s}
+  ._d4{transition-delay:.4s} ._d5{transition-delay:.5s} ._d6{transition-delay:.6s}
+  @keyframes _float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-13px)} }
+  ._float { animation:_float 5s ease-in-out infinite; }
+`;
+
+const serif = { fontFamily:"'DM Serif Display',Georgia,serif" } as const;
+
+function Eyebrow({ light, children }: { light?: boolean; children: React.ReactNode }) {
+  return (
+    <p className={`_r mb-4 flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[.14em] ${light ? 'text-yellow-400' : 'text-yellow-500'}`}>
+      <span className={`block h-[2px] w-6 ${light ? 'bg-yellow-400' : 'bg-yellow-500'}`} />
+      {children}
+    </p>
+  );
+}
+function H2({ light, delay = '_d1', children }: { light?: boolean; delay?: string; children: React.ReactNode }) {
+  return <h2 className={`_r ${delay} mb-5 text-4xl leading-[1.1] lg:text-[2.75rem] ${light ? 'text-yellow-50' : 'text-blue-900'}`} style={serif}>{children}</h2>;
+}
+
+// â”€â”€ S1: HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S1Hero() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  return (
+    <section ref={ref} className="relative overflow-hidden px-6 pb-24 pt-32 bg-blue-950">
+      <style>{CSS}</style>
+
+      {/* Full-bleed background image with overlay */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-950/80 to-blue-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 via-transparent to-blue-950/20" />
+      </div>
+
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px)',
+        backgroundSize: '56px 56px',
+        maskImage: 'linear-gradient(to right, black 0%, transparent 60%)',
+        WebkitMaskImage: 'linear-gradient(to right, black 0%, transparent 60%)',
+      }} />
+
+      {/* Left accent line */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-yellow-400/60 to-transparent" />
+
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          <div>
+            <span className="_r inline-flex items-center gap-2 rounded-full border border-yellow-400/30 bg-yellow-400/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-yellow-400 mb-5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-yellow-400" />NCC Licensed Â· VAS Operator
+            </span>
+            <h1 className="_r _d1 mb-6 text-5xl leading-[1.07] text-white lg:text-6xl" style={serif}>
+              Building Africa's<br /><em style={{color:'#fde68a'}}>Digital Infrastructure</em>
+            </h1>
+            <p className="_r _d2 mb-8 max-w-lg text-lg font-light leading-relaxed text-white/65">
+              Venix Partners Limited is a Nigerian telecom-integrated digital infrastructure company operating within regulated VAS frameworks â€” incorporated to build structured, enterprise-grade digital systems for Nigeria's expanding transaction economy.
+            </p>
+            <div className="_r _d3 flex flex-wrap gap-4">
+              <Link to="/contact" className="rounded-lg bg-yellow-400 px-6 py-3 text-sm font-bold text-blue-950 shadow-lg shadow-yellow-400/25 transition-all hover:-translate-y-0.5 hover:bg-yellow-300">Partner With Us</Link>
+              <Link to="/services" className="rounded-lg border border-white/20 px-6 py-3 text-sm font-bold text-white/80 transition-all hover:border-white/40 hover:text-white">Our Services â†’</Link>
+            </div>
+          </div>
+
+          {/* Right: floating stat cards replacing the image (image is now bg) */}
+          <div className="relative hidden lg:flex flex-col gap-4 items-end">
+            <div className="_float rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 w-56 shadow-xl">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400/70 mb-1">Operational Since</p>
+              <p className="text-2xl text-white" style={serif}>Lagos, Nigeria</p>
+              <p className="text-[12px] text-white/45 mt-1">Surulere Â· HQ</p>
+            </div>
+            <div className="rounded-2xl bg-blue-900/80 backdrop-blur-md border border-yellow-400/20 px-5 py-4 w-48 shadow-xl">
+              <p className="text-[9px] font-bold uppercase tracking-widest text-yellow-400 mb-1">NCC Licensed</p>
+              <p className="text-base text-white" style={serif}>VAS Operator</p>
+            </div>
+            <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 w-56 shadow-xl">
+              <div className="flex gap-4">
+                {[{n:'4',l:'Networks'},{n:'6+',l:'Platforms'}].map(s => (
+                  <div key={s.l}>
+                    <p className="text-2xl text-yellow-400" style={serif}>{s.n}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-white/40">{s.l}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S2: OVERVIEW + EVOLUTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S2Overview() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const stats = [{ num:'4', label:'Telecom Networks' },{ num:'6+', label:'Platform Verticals' },{ num:'NCC', label:'Regulatory License' },{ num:'B2B', label:'Enterprise-Grade' }];
+  const evolution = ['High-frequency telecom-integrated transactions','Enterprise API deployments','Payment & utility distribution frameworks','Content monetization models','Institutional messaging systems','Financial data services'];
+  return (
+    <section ref={ref} className="overflow-hidden bg-white px-6 py-24">
+      <Container>
+        <div className="mb-20 grid grid-cols-2 gap-5 rounded-3xl bg-gradient-to-br from-blue-900 to-blue-950 p-8 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <div key={s.label} className={`_r _d${i+1} text-center`}>
+              <p className="text-4xl text-yellow-400" style={serif}>{s.num}</p>
+              <p className="mt-1 text-[11px] font-bold uppercase tracking-widest text-white/45">{s.label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
+          <div>
+            <Eyebrow>Corporate Overview</Eyebrow>
+            <H2>Infrastructure-Led. Compliance-Driven. Engineered for Scale.</H2>
+            <p className="_r _d2 mb-4 text-[15px] font-light leading-relaxed text-blue-900/70">Incorporated to build structured, enterprise-grade digital systems, Venix operates as a holding entity overseeing a diversified portfolio of infrastructure and platform businesses serving Nigeria's expanding transaction economy.</p>
+            <p className="_r _d3 mb-6 text-[15px] font-light leading-relaxed text-blue-900/70">Through structured partnerships with MTN, Airtel, Globacom (Glo), and 9mobile (T2) via accredited VAS aggregator channels, the Company maintains compliant operational connectivity across multiple Nigerian telecom networks.</p>
+            <div className="_r _d4 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-100 p-6">
+              <p className="text-lg italic text-blue-900" style={serif}>"Our operational model is infrastructure-led, compliance-driven, and engineered for scale."</p>
+              <p className="mt-3 text-[13px] font-semibold text-blue-900/55">â€” Paul Omugbe, MD / CEO</p>
+            </div>
+          </div>
+          <div>
+            <Eyebrow>Our Evolution</Eyebrow>
+            <H2>From VAS Operator to Digital Infrastructure Enterprise</H2>
+            <p className="_r _d2 mb-7 text-[15px] font-light leading-relaxed text-blue-900/70">As Nigeria's digital economy matured â€” increased mobile penetration, broadband expansion, fintech growth, rising transaction volumes â€” Venix strategically evolved beyond traditional VAS deployment into a broader infrastructure enterprise.</p>
+            <ul className="_r _d3 space-y-3">
+              {evolution.map(item => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-[10px] font-bold text-blue-900">âœ“</span>
+                  <span className="text-[14px] text-blue-900/70">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S3: ARCHITECTURE (interactive tabs) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S3Architecture() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const [active, setActive] = useState(0);
+  const layers = [
+    { num:'01', icon:'ðŸ“¡', title:'Core Telecom Infrastructure',   desc:'Enterprise e-top-up and digital service aggregation via Venix Cloud â€” built for high-volume airtime and data distribution across all major Nigerian networks.',              img:'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'02', icon:'ðŸ’³', title:'Fintech & Payment Distribution', desc:'Structured utility vending and digital payment workflows built for financial institutions, fintech operators, and enterprise clients requiring compliant transaction routing.',  img:'https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'03', icon:'ðŸ’¬', title:'Enterprise Messaging',           desc:"Transactional and promotional communication infrastructure at telecom scale â€” powering high-volume bulk messaging and enterprise notification systems via Mesaj.",            img:'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'04', icon:'ðŸŽ¬', title:'Media & Content Platforms',      desc:"Mobile-first streaming and content monetization systems designed for Africa's growing digital media consumption landscape via Bingebay.",                                       img:'https://images.pexels.com/photos/7989741/pexels-photo-7989741.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'05', icon:'ðŸŽ®', title:'Gaming & Interactive Platforms', desc:"Skill-based digital competitions and engagement platforms powering interactive gaming ecosystems across Nigerian and African markets via Turnaj.",                              img:'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'06', icon:'ðŸ“Š', title:'Data & Intelligence Services',   desc:"Financial insights and digital sector analytics enabling data-driven decision-making for enterprise clients in Nigeria's dynamic economy via Finsight.",                          img:'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=900' },
+  ];
+  const benefits = ['Platform-level risk isolation','Regulatory clarity','Diversified revenue','Centralized IP governance','Shared infrastructure','Flexible capital allocation'];
+  return (
+    <section ref={ref} className="relative overflow-hidden px-6 py-24" style={{ background:'linear-gradient(135deg,#FBBF24 0%,#FEF3C7 100%)' }}>
+      <Container className="relative z-10">
+        <div className="mb-14 text-center">
+          <Eyebrow>Corporate Architecture</Eyebrow>
+          <H2>Six Integrated Platform Layers</H2>
+          <p className="_r _d2 mx-auto max-w-lg text-[15px] font-light leading-relaxed text-blue-900/65">Venix operates as a holding company overseeing a layered digital infrastructure ecosystem â€” each layer within a defined operational framework, benefiting from centralized infrastructure oversight.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.45fr]">
+          <div className="flex flex-col gap-1">
+            {layers.map((l, i) => (
+              <button key={l.num} onClick={() => setActive(i)} className={`flex items-center gap-4 rounded-2xl border-none px-5 py-4 text-left transition-all duration-200 cursor-pointer ${active===i ? 'bg-blue-900' : 'bg-blue-900/6 hover:bg-blue-900/12'}`}>
+                <span className={`min-w-[28px] text-xl ${active===i ? 'text-yellow-400' : 'text-blue-900/30'}`} style={serif}>{l.num}</span>
+                <div>
+                  <p className={`text-[13px] font-semibold ${active===i ? 'text-yellow-100' : 'text-blue-900'}`}>{l.title}</p>
+                  <p className={`mt-0.5 text-[11px] ${active===i ? 'text-yellow-400/80' : 'text-blue-900/45'}`}>{l.icon} Platform Layer</p>
+                </div>
+              </button>
+            ))}
+          </div>
+          <div className="relative overflow-hidden rounded-3xl bg-blue-900">
+            <img key={active} src={layers[active].img} alt={layers[active].title} className="h-52 w-full object-cover opacity-40" style={{transition:'opacity .4s'}} />
+            <div className="absolute inset-x-0 top-0 h-52 bg-gradient-to-b from-transparent to-blue-900/85" />
+            <div className="relative p-8">
+              <span className="pointer-events-none absolute right-6 top-0 leading-none text-yellow-400/10 text-8xl" style={serif}>{layers[active].num}</span>
+              <span className="mb-3 block text-4xl">{layers[active].icon}</span>
+              <h3 className="mb-3 text-2xl text-yellow-100" style={serif}>{layers[active].title}</h3>
+              <p className="mb-6 text-[14px] font-light leading-relaxed text-white/65">{layers[active].desc}</p>
+              <div className="grid grid-cols-2 gap-2">
+                {benefits.map(b => (<div key={b} className="flex items-center gap-2 text-[12px] text-white/50"><span className="h-1 w-1 shrink-0 rounded-full bg-yellow-400" />{b}</div>))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S4: GOVERNANCE + REGULATORY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S4Governance() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const governance = [
+    { icon:'âš–ï¸', title:'Regulatory Compliance',  desc:'Strict adherence to NCC licensing conditions and telecom operating standards across all platform operations.' },
+    { icon:'ðŸ›¡ï¸', title:'Risk Management',         desc:'Identification, assessment, and mitigation of operational, technological, and market risks.' },
+    { icon:'ðŸ”', title:'Information Security',     desc:'Secure infrastructure protocols including firewall protections, IP whitelisting, and controlled API access.' },
+    { icon:'ðŸ”', title:'Vendor Due Diligence',     desc:'Structured partner evaluation processes and compliance verification prior to integration.' },
+    { icon:'ðŸ“Š', title:'Financial Oversight',      desc:'Structured financial reporting, internal monitoring, and operational discipline across all entities.' },
+    { icon:'ðŸ“‹', title:'Operational Transparency', desc:'Clear documentation of system architecture, integration frameworks, and stakeholder engagement processes.' },
+  ];
+  const networks = [{ abbr:'MTN', name:'MTN Nigeria' },{ abbr:'AIR', name:'Airtel Nigeria' },{ abbr:'GLO', name:'Globacom (Glo)' },{ abbr:'9MB', name:'9mobile (T2)' }];
+  return (
+    <section ref={ref} className="relative overflow-hidden bg-blue-900 px-6 py-24">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage:'linear-gradient(rgba(251,191,36,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.04) 1px,transparent 1px)', backgroundSize:'56px 56px' }} />
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">
+          <div>
+            <Eyebrow light>Governance Framework</Eyebrow>
+            <H2 light>Structured for Long-Term Institutional Credibility</H2>
+            <p className="_r _d2 mb-10 text-[15px] font-light leading-relaxed text-white/60">Venix Partners Limited operates under structured corporate governance principles embedded within both infrastructure operations and enterprise service delivery.</p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {governance.map((g, i) => (
+                <div key={g.title} className={`_r _d${i+1} rounded-2xl border border-white/10 bg-white/4 p-5 transition-all hover:border-yellow-400/30 hover:bg-white/7`}>
+                  <span className="mb-3 block text-2xl">{g.icon}</span>
+                  <p className="mb-2 text-[13px] font-semibold text-yellow-100">{g.title}</p>
+                  <p className="text-[12px] font-light leading-relaxed text-white/55">{g.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <Eyebrow light>Regulatory & Licensing</Eyebrow>
+            <H2 light>NCC Licensed. Fully Compliant.</H2>
+            <p className="_r _d2 mb-8 text-[15px] font-light leading-relaxed text-white/60">Venix holds a Value Added Service (VAS) License issued by the Nigerian Communications Commission (NCC) â€” enabling structured and compliant deployment of telecom-based digital platforms.</p>
+            <div className="_r _d3 mb-8 flex items-center gap-4 rounded-2xl border border-yellow-400/20 bg-yellow-400/10 p-5">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-yellow-200 text-2xl">ðŸ›ï¸</div>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400">License Authority</p>
+                <p className="text-base text-white" style={serif}>Nigerian Communications Commission â€” VAS Operator</p>
+              </div>
+            </div>
+            <p className="_r _d4 mb-4 text-[11px] font-bold uppercase tracking-widest text-white/35">Accredited Network Partners</p>
+            <div className="_r _d5 grid grid-cols-2 gap-3 mb-8">
+              {networks.map(n => (
+                <div key={n.abbr} className="flex items-center gap-3 rounded-xl border border-white/10 p-4 transition-all hover:border-yellow-400/30">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-200 text-[10px] font-extrabold text-blue-900">{n.abbr}</div>
+                  <div><p className="text-[13px] font-semibold text-white">{n.name}</p><p className="text-[11px] text-white/40">Active integration</p></div>
+                </div>
+              ))}
+            </div>
+            <div className="_r _d6 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-100 p-6">
+              <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-blue-900/55">Infrastructure Philosophy</p>
+              <p className="text-lg italic text-blue-900" style={serif}>"Infrastructure must be reliable, secure, scalable, and compliant."</p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S5: MISSION + LEADERSHIP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S5Mission() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const positions = ['Telecommunications','Digital payments','Enterprise messaging','Media distribution','Interactive gaming','Financial intelligence'];
+  return (
+    <section ref={ref} className="overflow-hidden px-6 py-24" style={{ background:'linear-gradient(135deg,#FBBF24 0%,#FEF3C7 100%)' }}>
+      <Container>
+        <div className="mb-20 text-center">
+          <Eyebrow>Our Mission</Eyebrow>
+          <p className="_r _d1 mx-auto max-w-4xl text-4xl italic leading-snug text-blue-900 lg:text-5xl" style={serif}>
+            {'\u201C'}To become a leading African mobile digital infrastructure company powering secure transactions, digital access, and connected services across emerging markets.{'\u201D'}
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+          <div>
+            <Eyebrow>Strategic Position</Eyebrow>
+            <H2>At the Intersection of Africa's Digital Economy</H2>
+            <p className="_r _d2 mb-8 text-[15px] font-light leading-relaxed text-blue-900/70">By integrating regulated telecom frameworks with enterprise-grade API infrastructure, Venix enables secure digital participation across multiple sectors simultaneously.</p>
+            <div className="_r _d3 grid grid-cols-2 gap-3">
+              {positions.map(p => (
+                <div key={p} className="flex items-center gap-2.5 rounded-xl border border-blue-900/12 bg-blue-900/6 px-4 py-3 transition-all hover:border-yellow-400/50 hover:bg-blue-900/10">
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400" />
+                  <span className="text-[13px] font-medium text-blue-900">{p}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <Eyebrow>Leadership</Eyebrow>
+            <H2>Disciplined Operational Management</H2>
+            <p className="_r _d2 mb-6 text-[15px] font-light leading-relaxed text-blue-900/70">Venix is guided by executive leadership with experience spanning telecom integration, financial services, infrastructure deployment, digital transformation, regulatory engagement, and enterprise technology management.</p>
+            <div className="_r _d3 mb-5 flex items-center gap-5 rounded-2xl border border-blue-900/12 bg-white/60 p-5 backdrop-blur-sm">
+              <img src="" alt="Leadership" className="h-16 w-16 shrink-0 rounded-full object-cover" />
+              <div>
+                <p className="text-xl text-blue-900" style={serif}>Paul Omugbe</p>
+                <p className="text-[13px] text-blue-900/55">MD / CEO, Venix Partners Limited</p>
+                <p className="mt-1 text-[12px] italic text-blue-900/40">Telecom Â· Finance Â· Infrastructure Â· Digital Transformation</p>
+              </div>
+            </div>
+            <div className="_r _d4 rounded-2xl bg-blue-900 p-6">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-yellow-400">Registered Office</p>
+              <p className="text-base text-white" style={serif}>Venix Partners Limited</p>
+              <p className="mt-2 text-[13px] font-light leading-relaxed text-white/55">35, Yesufu Sanusi Street, Off Adeniran Ogunsanya<br />Surulere, Lagos, Nigeria</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Link to="/contact" className="rounded-lg bg-yellow-400 px-5 py-2.5 text-[13px] font-bold text-blue-900 transition-all hover:bg-yellow-300">Get in Touch</Link>
+                <Link to="/services" className="rounded-lg border border-white/20 px-5 py-2.5 text-[13px] font-semibold text-white transition-all hover:border-yellow-400/50 hover:text-yellow-400">Our Services</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export default function AboutPage() {
+  return <><S1Hero /><S2Overview /><S3Architecture /><S4Governance /><S5Mission /></>;
+}
+
+=== BlogPage.tsx ===
+import Container from '../components/ui/Container';
+import SectionHeading from '../components/ui/SectionHeading';
+
+export default function BlogPage() {
+  return (
+    <div className="pt-32">
+      <Container>
+        <SectionHeading
+          title="Blog & Resources"
+          subtitle="Stay informed with the latest financial news and insights"
+          centered={true}
+        />
+        {/* Placeholder content - implement full blog page content later */}
+        <div className="text-center py-12">
+          <p className="text-gray-600">Blog content coming soon...</p>
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+=== BusinessPage.tsx ===
+import Container from '../components/ui/Container';
+import SectionHeading from '../components/ui/SectionHeading';
+
+export default function BusinessPage() {
+  return (
+    <div className="pt-32">
+      <Container>
+      <SectionHeading
+        title="Value Added Services"
+        subtitle="Enhance your business with our innovative solutions"
+        centered={true}
+      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8">
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+        <h3 className="text-lg font-semibold mb-2">Video Streaming</h3>
+        <p className="text-gray-600">Integrate secure video streaming for customer engagement and business presentations.</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+        <h3 className="text-lg font-semibold mb-2">Fantasy Financial</h3>
+        <p className="text-gray-600">Gamify financial management with fantasy business leagues and competitions.</p>
+        </div>
+        <div className="bg-white rounded-lg shadow p-6 text-center">
+        <h3 className="text-lg font-semibold mb-2">IVR & Voice OTP</h3>
+        <p className="text-gray-600">Enhance security and customer experience with interactive voice response and voice-based OTP solutions.</p>
+        </div>
+      </div>
+      <div className="text-center py-12">
+        <p className="text-gray-600">More value added services coming soon...</p>
+      </div>
+      </Container>
+    </div>
+  );
+}
+
+=== CareersPage.tsx ===
+// CareersPage.tsx â€” Venix Partners Limited
+
+export default function CareersPage() {
+  return (
+    <div style={{ fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", background: "#fff" }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+        @keyframes cp-fadeUp {
+          from { opacity: 0; transform: translateY(24px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes cp-blob {
+          0%,100% { transform: translateY(0) scale(1); }
+          50%     { transform: translateY(-20px) scale(1.04); }
+        }
+        @keyframes cp-pulse {
+          0%,100% { opacity: 1; }
+          50%     { opacity: 0.4; }
+        }
+
+        .cp-serif { font-family: 'DM Serif Display', Georgia, serif; }
+        .cp-sans  { font-family: 'DM Sans', sans-serif; }
+
+        .cp-hero {
+          background: #0f172a;
+          min-height: 62vh;
+          display: flex;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+          padding: 140px 40px 80px;
+        }
+
+        .cp-hero-bg-img {
+          position: absolute; inset: 0;
+          object-fit: cover; width: 100%; height: 100%;
+        }
+        .cp-hero-overlay-r {
+          position: absolute; inset: 0;
+          background: linear-gradient(to right, rgba(15,23,42,0.96) 0%, rgba(15,23,42,0.82) 50%, rgba(15,23,42,0.5) 100%);
+        }
+        .cp-hero-overlay-t {
+          position: absolute; inset: 0;
+          background: linear-gradient(to top, rgba(15,23,42,0.6) 0%, transparent 60%);
+        }
+
+        .cp-blob {
+          position: absolute;
+          border-radius: 50%;
+          pointer-events: none;
+          animation: cp-blob ease-in-out infinite;
+        }
+
+        .cp-dot-grid {
+          position: absolute; inset: 0; pointer-events: none;
+          background-image: linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px);
+          background-size: 56px 56px;
+          -webkit-mask-image: linear-gradient(to right, black 0%, transparent 60%);
+          mask-image: linear-gradient(to right, black 0%, transparent 60%);
+        }
+
+        .cp-fade-1 { animation: cp-fadeUp 0.7s 0.1s ease both; }
+        .cp-fade-2 { animation: cp-fadeUp 0.7s 0.2s ease both; }
+        .cp-fade-3 { animation: cp-fadeUp 0.7s 0.3s ease both; }
+        .cp-fade-4 { animation: cp-fadeUp 0.7s 0.4s ease both; }
+        .cp-fade-5 { animation: cp-fadeUp 0.7s 0.5s ease both; }
+        .cp-fade-6 { animation: cp-fadeUp 0.7s 0.6s ease both; }
+
+        .cp-notice-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(251,191,36,0.1);
+          border: 1.5px solid rgba(251,191,36,0.3);
+          border-radius: 100px;
+          padding: 7px 18px;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #FBBF24;
+          margin-bottom: 28px;
+        }
+
+        .cp-notice-dot {
+          width: 7px; height: 7px; border-radius: 50%;
+          background: #FBBF24;
+          animation: cp-pulse 2s infinite;
+        }
+
+        .cp-status-card {
+          background: #fff;
+          border-radius: 20px;
+          border: 1.5px solid rgba(30,58,138,0.1);
+          padding: 40px 44px;
+          box-shadow: 0 20px 60px rgba(30,58,138,0.1);
+          max-width: 680px;
+          margin: 0 auto;
+        }
+
+        .cp-status-icon {
+          width: 64px; height: 64px; border-radius: 16px;
+          background: linear-gradient(135deg, #FEF3C7, #FBBF24);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 28px;
+          margin-bottom: 24px;
+          box-shadow: 0 8px 24px rgba(251,191,36,0.3);
+        }
+
+        .cp-perks-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 20px;
+          margin-top: 48px;
+        }
+
+        .cp-perk-card {
+          background: #fff;
+          border: 1.5px solid rgba(30,58,138,0.08);
+          border-radius: 16px;
+          padding: 28px 28px;
+          transition: all 0.2s ease;
+        }
+        .cp-perk-card:hover {
+          border-color: rgba(251,191,36,0.5);
+          box-shadow: 0 8px 32px rgba(251,191,36,0.12);
+          transform: translateY(-3px);
+        }
+
+        .cp-perk-icon {
+          width: 44px; height: 44px; border-radius: 12px;
+          background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+          display: flex; align-items: center; justify-content: center;
+          font-size: 20px; margin-bottom: 16px;
+        }
+
+        .cp-divider {
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(30,58,138,0.1) 30%, rgba(30,58,138,0.1) 70%, transparent);
+          margin: 56px 0;
+        }
+
+        .cp-notify-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: #1E3A8A;
+          color: #fff;
+          padding: 14px 28px;
+          border-radius: 10px;
+          border: none;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          text-decoration: none;
+        }
+        .cp-notify-btn:hover {
+          background: #163070;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(30,58,138,0.3);
+        }
+
+        .cp-values-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
+        }
+
+        .cp-value-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 18px 20px;
+          background: #FAFAFA;
+          border-radius: 12px;
+          border: 1px solid rgba(30,58,138,0.06);
+        }
+
+        .cp-value-bullet {
+          width: 8px; height: 8px; border-radius: 50%;
+          background: #FBBF24;
+          flex-shrink: 0;
+          margin-top: 6px;
+        }
+
+        @media (max-width: 640px) {
+          .cp-hero { padding: 120px 24px 64px; }
+          .cp-status-card { padding: 28px 24px; }
+          .cp-hero-title { font-size: clamp(2.4rem, 8vw, 3rem) !important; }
+        }
+      `}</style>
+
+      {/* â”€â”€ HERO â”€â”€ */}
+      <div className="cp-hero">
+        <img className="cp-hero-bg-img" src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
+        <div className="cp-hero-overlay-r" />
+        <div className="cp-hero-overlay-t" />
+        <div className="cp-dot-grid" />
+        <div style={{ left: 0, top: 0, bottom: 0, width: 3, background: "linear-gradient(to bottom, transparent, rgba(251,191,36,.6) 30%, rgba(251,191,36,.6) 70%, transparent)", position: "absolute" }} />
+
+        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", position: "relative", zIndex: 1 }}>
+          <div className="cp-notice-badge cp-fade-1">
+            <span className="cp-notice-dot" />
+            Careers at Venix
+          </div>
+
+          <h1
+            className="cp-serif cp-hero-title cp-fade-2"
+            style={{ fontSize: "clamp(2.8rem, 5.5vw, 5rem)", lineHeight: 1.06, color: "#fff", marginBottom: 20, maxWidth: 640 }}
+          >
+            Build the future of<br />
+            <em style={{ color: "#fde68a" }}>digital Africa</em><br />
+            with us.
+          </h1>
+
+          <p
+            className="cp-sans cp-fade-3"
+            style={{ fontSize: 16, fontWeight: 300, lineHeight: 1.8, color: "rgba(255,255,255,0.65)", maxWidth: 520, marginBottom: 0 }}
+          >
+            We are a team of engineers, strategists, and builders working at the intersection of telecom, fintech, and digital infrastructure â€” shaping Africa's transaction economy.
+          </p>
+        </div>
+      </div>
+
+      {/* â”€â”€ MAIN CONTENT â”€â”€ */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "72px 40px 100px" }}>
+
+        {/* Status card â€” not accepting applications */}
+        <div className="cp-fade-4" style={{ display: "flex", justifyContent: "center", marginBottom: 72 }}>
+          <div className="cp-status-card">
+            <div className="cp-status-icon">ðŸ“‹</div>
+
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(239,68,68,0.08)", border: "1.5px solid rgba(239,68,68,0.2)", borderRadius: 100, padding: "4px 14px", fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "#DC2626" }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#DC2626", animation: "cp-pulse 2s infinite" }} />
+                Applications Closed
+              </span>
+            </div>
+
+            <h2 className="cp-serif" style={{ fontSize: "1.9rem", color: "#1E3A8A", marginBottom: 14, lineHeight: 1.2 }}>
+              We're not currently accepting applications.
+            </h2>
+
+            <p className="cp-sans" style={{ fontSize: 15, fontWeight: 300, lineHeight: 1.8, color: "#374151", marginBottom: 28 }}>
+              Thank you for your interest in joining Venix Partners Limited. We are not actively hiring at this time, but we are always growing â€” when new roles open up, we will post them here first.
+            </p>
+
+            <p className="cp-sans" style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#6B7280", marginBottom: 32 }}>
+              If you're passionate about building digital infrastructure for Africa and would like us to keep your profile on file, feel free to reach out to us at{" "}
+              <a href="mailto:hr@venixpartners.com" style={{ color: "#1E3A8A", fontWeight: 500, textDecoration: "none", borderBottom: "1px solid rgba(30,58,138,0.3)" }}>
+                hr@venixpartners.com
+              </a>
+            </p>
+
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+              <a href="mailto:hr@venixpartners.com" className="cp-notify-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Send Your Profile
+              </a>
+              <a href="/contact" style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "rgba(30,58,138,0.06)", color: "#1E3A8A", padding: "14px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, textDecoration: "none", transition: "all 0.2s" }}>
+                Contact Us
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="cp-divider" />
+
+        {/* Why Venix */}
+        <div className="cp-fade-5">
+          <div style={{ textAlign: "center", marginBottom: 44 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FBBF24", marginBottom: 12 }}>Why Venix</p>
+            <h2 className="cp-serif" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#1E3A8A", lineHeight: 1.15 }}>
+              A place where your work<br /><em>actually matters.</em>
+            </h2>
+          </div>
+
+          <div className="cp-perks-grid">
+            {[
+              { icon: "ðŸŒ", title: "Continental Impact",    desc: "Your work reaches millions of Nigerians and shapes the digital infrastructure of an entire continent."                },
+              { icon: "âš¡", title: "Six Platform Verticals", desc: "Work across telecom, fintech, media, gaming, and AI â€” a rare breadth of technology in a single company."          },
+              { icon: "ðŸ›ï¸", title: "NCC Regulated",         desc: "We operate within Nigeria's regulatory framework, giving you stability, compliance, and long-term career security." },
+              { icon: "ðŸ¤", title: "Enterprise Networks",   desc: "Direct access to Nigeria's four major telecom operators â€” MTN, Airtel, Glo, and 9mobile."                          },
+              { icon: "ðŸ“ˆ", title: "Growth Focused",        desc: "We invest in our people. Every team member has a clear path to leadership as Venix expands across Africa."         },
+              { icon: "ðŸ”’", title: "Purposeful Work",       desc: "We're not building apps for fun â€” we're building the financial and digital rails that power everyday life."         },
+            ].map((perk) => (
+              <div key={perk.title} className="cp-perk-card">
+                <div className="cp-perk-icon">{perk.icon}</div>
+                <h3 className="cp-sans" style={{ fontSize: 15, fontWeight: 700, color: "#1E3A8A", marginBottom: 8 }}>{perk.title}</h3>
+                <p className="cp-sans"   style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.7, color: "#6B7280" }}>{perk.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="cp-divider" />
+
+        {/* Values */}
+        <div className="cp-fade-6">
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#FBBF24", marginBottom: 12 }}>Our Values</p>
+            <h2 className="cp-serif" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#1E3A8A", lineHeight: 1.2 }}>
+              What we stand for
+            </h2>
+          </div>
+
+          <div className="cp-values-grid">
+            {[
+              { title: "Integrity First",       desc: "We do the right thing, always â€” with clients, partners, and each other."            },
+              { title: "Enterprise Excellence", desc: "We hold ourselves to the highest standards of quality, compliance, and delivery."    },
+              { title: "African Ambition",      desc: "We think continent-scale. Every decision we make is in service of a bigger vision."  },
+              { title: "Collaborative Spirit",  desc: "We win together. The best ideas come from diverse minds working toward one goal."    },
+              { title: "Builder Mentality",     desc: "We don't wait for permission. We identify problems, own solutions, and execute."     },
+              { title: "Long-Term Thinking",    desc: "We build for decades, not quarters. Sustainability and discipline guide our growth." },
+            ].map((v) => (
+              <div key={v.title} className="cp-value-item">
+                <div className="cp-value-bullet" style={{ marginTop: 7 }} />
+                <div>
+                  <p className="cp-sans" style={{ fontSize: 13.5, fontWeight: 700, color: "#1E3A8A", marginBottom: 4 }}>{v.title}</p>
+                  <p className="cp-sans" style={{ fontSize: 13, fontWeight: 300, lineHeight: 1.7, color: "#6B7280" }}>{v.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="cp-divider" />
+
+        {/* Bottom CTA */}
+        <div style={{ textAlign: "center" }}>
+          <p className="cp-sans" style={{ fontSize: 13, fontWeight: 400, color: "#9CA3AF", marginBottom: 8 }}>
+            Check back regularly â€” opportunities will be posted here when available.
+          </p>
+          <p className="cp-sans" style={{ fontSize: 13, fontWeight: 300, color: "#9CA3AF" }}>
+            Venix Partners Limited Â· Lagos, Nigeria Â·{" "}
+            <a href="mailto:hr@venixpartners.com" style={{ color: "#1E3A8A", fontWeight: 500, textDecoration: "none" }}>hr@venixpartners.com</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+=== CompliancePage.tsx ===
+// â”€â”€â”€ CompliancePage.tsx â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../components/ui/Container';
+
+function useReveal(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('_vis', e.isIntersecting)),
+      { threshold: 0.08 }
+    );
+    ref.current?.querySelectorAll('._r').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [ref]);
+}
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  ._r { opacity:0; transform:translateY(20px); transition:opacity .65s ease,transform .65s ease; }
+  ._r._vis { opacity:1; transform:none; }
+  ._d1{transition-delay:.05s} ._d2{transition-delay:.1s} ._d3{transition-delay:.15s}
+  @keyframes _float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  ._float { animation:_float 4s ease-in-out infinite; }
+`;
+const serif = { fontFamily:"'DM Serif Display',Georgia,serif" } as const;
+const sans  = { fontFamily:"'DM Sans',sans-serif" } as const;
+
+const sections = [
+  { id:'framework',   label:'Compliance Framework' },
+  { id:'ncc',         label:'NCC Licensing' },
+  { id:'data',        label:'Data Protection' },
+  { id:'aml',         label:'AML & Financial' },
+  { id:'governance',  label:'Corporate Governance' },
+  { id:'vendor',      label:'Vendor Due Diligence' },
+  { id:'security',    label:'Information Security' },
+  { id:'reporting',   label:'Reporting & Whistleblowing' },
+  { id:'contact',     label:'Compliance Contact' },
+];
+
+function SideNav({ active }: { active: string }) {
+  return (
+    <nav className="sticky top-28 hidden xl:block w-56 shrink-0">
+      <p style={{ ...sans, fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#FBBF24', marginBottom: 16 }}>On This Page</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {sections.map(s => (
+          <a key={s.id} href={`#${s.id}`} style={{ ...sans, fontSize: 13, fontWeight: active === s.id ? 600 : 400, color: active === s.id ? '#1E3A8A' : '#6B7280', padding: '6px 12px', borderRadius: 8, borderLeft: `2px solid ${active === s.id ? '#FBBF24' : 'transparent'}`, textDecoration: 'none', transition: 'all 0.15s', background: active === s.id ? 'rgba(251,191,36,0.08)' : 'transparent' }}>
+            {s.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function Section({ id, title, badge, children }: { id: string; title: string; badge?: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useReveal(ref as any);
+  return (
+    <div ref={ref} id={id} style={{ marginBottom: 56, scrollMarginTop: 100 }}>
+      <div className="_r" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}>
+        <span style={{ display: 'block', height: 2, width: 24, background: '#FBBF24', flexShrink: 0 }} />
+        <h2 style={{ ...serif, fontSize: '1.5rem', color: '#1E3A8A', lineHeight: 1.2 }}>{title}</h2>
+        {badge && <span style={{ ...sans, fontSize: 10, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', background: 'rgba(251,191,36,0.15)', border: '1px solid rgba(251,191,36,0.4)', color: '#1E3A8A', borderRadius: 100, padding: '3px 10px' }}>{badge}</span>}
+      </div>
+      <div className="_r _d1">{children}</div>
+    </div>
+  );
+}
+
+function P({ children }: { children: React.ReactNode }) {
+  return <p style={{ ...sans, fontSize: 15, fontWeight: 300, lineHeight: 1.85, color: '#374151', marginBottom: 16 }}>{children}</p>;
+}
+function UL({ items }: { items: string[] }) {
+  return (
+    <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none' }}>
+      {items.map(item => (
+        <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 8 }}>
+          <span style={{ marginTop: 8, height: 6, width: 6, borderRadius: '50%', background: '#FBBF24', flexShrink: 0 }} />
+          <span style={{ ...sans, fontSize: 14, fontWeight: 300, lineHeight: 1.7, color: '#374151' }}>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+function InfoBox({ icon, title, children }: { icon: string; title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ background: 'rgba(30,58,138,0.03)', border: '1px solid rgba(30,58,138,0.1)', borderRadius: 14, padding: '20px 24px', marginBottom: 20, display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+      <span style={{ fontSize: 22, flexShrink: 0, marginTop: 2 }}>{icon}</span>
+      <div>
+        <p style={{ ...sans, fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#1E3A8A', marginBottom: 6 }}>{title}</p>
+        <p style={{ ...sans, fontSize: 14, fontWeight: 300, lineHeight: 1.75, color: '#374151' }}>{children}</p>
+      </div>
+    </div>
+  );
+}
+
+export default function CompliancePage() {
+  const [active, setActive] = useState('framework');
+
+  useEffect(() => {
+    const handler = () => {
+      for (const s of [...sections].reverse()) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top <= 140) { setActive(s.id); break; }
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  const pillars = [
+    { icon: 'ðŸ›ï¸', title: 'NCC Licensed', sub: 'VAS Operator' },
+    { icon: 'ðŸ”', title: 'NDPR/NDPA', sub: 'Data Protection' },
+    { icon: 'âš–ï¸', title: 'CAMA 2020', sub: 'Corporate Law' },
+    { icon: 'ðŸ›¡ï¸', title: 'AML/CFT', sub: 'Financial Crime' },
+  ];
+
+  return (
+    <div style={{ ...sans, minHeight: '100vh', background: '#fff' }}>
+      <style>{CSS}</style>
+
+      {/* â”€â”€ HERO â”€â”€ */}
+      <div className="relative overflow-hidden bg-blue-950" style={{ paddingTop: 128, paddingBottom: 72, paddingLeft: 24, paddingRight: 24 }}>
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.98) 0%, rgba(30,58,138,0.6) 100%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px)', backgroundSize: '56px 56px' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(251,191,36,.6) 30%, rgba(251,191,36,.6) 70%, transparent)' }} />
+        <Container className="relative z-10">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(251,191,36,0.1)', border: '1.5px solid rgba(251,191,36,0.3)', borderRadius: 100, padding: '6px 16px', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FBBF24', marginBottom: 24 }}>
+            âš–ï¸ Legal Â· Compliance
+          </span>
+          <h1 style={{ ...serif, fontSize: 'clamp(2.4rem, 5vw, 4rem)', color: '#fff', lineHeight: 1.06, marginBottom: 16, maxWidth: 640 }}>
+            Compliance &<br /><em style={{ color: '#fde68a' }}>Regulatory Framework</em>
+          </h1>
+          <p style={{ ...sans, fontSize: 15, fontWeight: 300, color: 'rgba(255,255,255,0.6)', maxWidth: 560, lineHeight: 1.8, marginBottom: 40 }}>
+            Venix Partners Limited operates within a structured compliance and governance framework anchored in Nigerian telecommunications law, data protection regulation, corporate governance standards, and responsible enterprise infrastructure practices.
+          </p>
+
+          {/* Compliance pillars */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, maxWidth: 700 }}>
+            {pillars.map((p, i) => (
+              <div key={p.title} className="_float" style={{ animationDelay: `${i * 0.4}s`, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 14, padding: '16px 18px' }}>
+                <span style={{ fontSize: 22, display: 'block', marginBottom: 8 }}>{p.icon}</span>
+                <p style={{ ...serif, fontSize: '0.95rem', color: '#fff', marginBottom: 2 }}>{p.title}</p>
+                <p style={{ ...sans, fontSize: 11, fontWeight: 500, color: 'rgba(251,191,36,0.7)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{p.sub}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </div>
+
+      {/* â”€â”€ BODY â”€â”€ */}
+      <Container>
+        <div style={{ display: 'flex', gap: 64, paddingTop: 64, paddingBottom: 100, alignItems: 'flex-start' }}>
+          <SideNav active={active} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+
+            <Section id="framework" title="Compliance Framework Overview">
+              <P>Venix Partners Limited is committed to operating with the highest standards of regulatory compliance, corporate governance, and institutional accountability. Our compliance framework is embedded across all business units, platform operations, and third-party engagement processes.</P>
+              <P>Our compliance posture is designed to meet and exceed the requirements of the Nigerian Communications Commission (NCC), the Nigeria Data Protection Commission (NDPC), and other applicable regulatory bodies â€” ensuring that our infrastructure, partnerships, and enterprise services are delivered responsibly and within the law.</P>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginBottom: 20 }}>
+                {[
+                  { icon: 'ðŸ“‹', t: 'Policy-Driven', d: 'All operations governed by documented internal policies and procedures' },
+                  { icon: 'ðŸ”„', t: 'Continuously Reviewed', d: 'Compliance posture reviewed against regulatory updates and operational changes' },
+                  { icon: 'ðŸ‘¥', t: 'Board Oversight', d: 'Governance and compliance matters reported at executive and board level' },
+                  { icon: 'ðŸ“Š', t: 'Audit-Ready', d: 'Documentation and records maintained for regulatory review at all times' },
+                ].map(card => (
+                  <div key={card.t} style={{ background: 'rgba(30,58,138,0.03)', border: '1px solid rgba(30,58,138,0.08)', borderRadius: 12, padding: '16px 18px' }}>
+                    <span style={{ fontSize: 20, display: 'block', marginBottom: 8 }}>{card.icon}</span>
+                    <p style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', marginBottom: 4 }}>{card.t}</p>
+                    <p style={{ ...sans, fontSize: 12, fontWeight: 300, color: '#6B7280', lineHeight: 1.6 }}>{card.d}</p>
+                  </div>
+                ))}
+              </div>
+            </Section>
+
+            <Section id="ncc" title="NCC Licensing & Telecom Regulatory Compliance" badge="Active">
+              <InfoBox icon="ðŸ›ï¸" title="NCC VAS License">
+                Venix Partners Limited holds a Value Added Service (VAS) License issued by the Nigerian Communications Commission (NCC), enabling the company to legally deploy telecom-integrated digital platforms and maintain structured connectivity with licensed network operators in Nigeria.
+              </InfoBox>
+              <P>Our telecom compliance obligations include:</P>
+              <UL items={[
+                'Adherence to all conditions attached to our NCC VAS operating licence',
+                'Maintenance of approved technical interconnection standards with MTN, Airtel, Glo, and 9mobile through accredited VAS aggregator channels',
+                'Compliance with NCC Consumer Code of Practice, Service Level Agreements, and approved rate structures',
+                'Timely submission of regulatory reports, usage data, and compliance certifications as required by the NCC',
+                'Immediate response to NCC directives, investigations, or enforcement notices',
+                'Prohibition of any service that violates NCC content standards or applicable broadcasting guidelines',
+              ]} />
+              <P>Venix does not operate any telecom infrastructure outside the scope of its NCC licensing. All network integrations are conducted through properly accredited intermediary channels in compliance with applicable interconnection frameworks.</P>
+            </Section>
+
+            <Section id="data" title="Data Protection Compliance" badge="NDPA / NDPR">
+              <InfoBox icon="ðŸ”" title="Nigeria Data Protection Act (NDPA) 2023">
+                Venix is committed to full compliance with the Nigeria Data Protection Act 2023 and the Nigeria Data Protection Regulation (NDPR) administered by the Nigeria Data Protection Commission (NDPC). All personal data processing activities are conducted on a lawful basis with appropriate safeguards in place.
+              </InfoBox>
+              <P>Our data protection compliance programme includes:</P>
+              <UL items={[
+                'Maintenance of a comprehensive data inventory and processing register',
+                'Data Protection Impact Assessments (DPIAs) for high-risk processing activities',
+                'Appointment of a Data Protection Officer (DPO) with responsibility for compliance oversight',
+                'Data subject rights procedures including access, rectification, erasure, and portability',
+                'Documented data processor agreements with all third-party vendors',
+                'Personal data breach response procedures with regulatory notification obligations',
+                'Staff training on data protection responsibilities and handling requirements',
+                'Regular internal audits of data processing activities and security controls',
+              ]} />
+              <P>For data protection enquiries or to exercise your rights under the NDPA, please contact our Data Protection Officer at <strong>hello@venixpartners.com</strong> with the subject line "Data Subject Request".</P>
+            </Section>
+
+            <Section id="aml" title="Anti-Money Laundering & Financial Crime Compliance">
+              <P>Where Venix services involve financial transaction processing, payment facilitation, or utility distribution, we implement Anti-Money Laundering (AML) and Counter-Financing of Terrorism (CFT) measures consistent with applicable Nigerian financial regulations and FATF recommendations.</P>
+              <UL items={[
+                'Customer Due Diligence (CDD) and Know Your Customer (KYC) procedures for enterprise onboarding',
+                'Enhanced Due Diligence (EDD) for higher-risk clients, jurisdictions, or transaction profiles',
+                'Transaction monitoring protocols for detection of suspicious patterns or anomalies',
+                'Screening against applicable sanctions lists and PEP databases',
+                'Prohibition of services to sanctioned individuals, entities, or jurisdictions',
+                'Internal escalation and Suspicious Activity Reporting (SAR) procedures',
+                'Staff training on AML/CFT obligations and red flag indicators',
+              ]} />
+              <P>Venix does not facilitate transactions that it knows or suspects to be proceeds of crime, and cooperates fully with competent authorities in any lawful investigation or regulatory enquiry.</P>
+            </Section>
+
+            <Section id="governance" title="Corporate Governance">
+              <P>Venix Partners Limited is incorporated under the Companies and Allied Matters Act (CAMA) 2020 and operates under structured corporate governance principles designed to ensure accountability, transparency, and long-term institutional integrity.</P>
+              <UL items={[
+                'Board-level oversight of strategic, operational, and compliance decisions',
+                'Defined delegation of authority and management accountability structures',
+                'Regular board and management reporting on financial performance, risk, and compliance',
+                'Documented conflict of interest policies applicable to all directors and key personnel',
+                'Annual accounts prepared and filed in compliance with Nigerian corporate law',
+                'Related-party transaction policies to ensure arm\'s-length dealing',
+                'Whistleblower and ethics reporting mechanisms (see Reporting section)',
+              ]} />
+            </Section>
+
+            <Section id="vendor" title="Vendor & Partner Due Diligence">
+              <P>All third-party vendors, technology partners, payment processors, and network aggregators engaged by Venix are subject to a structured due diligence process prior to onboarding and on an ongoing basis.</P>
+              <UL items={[
+                'Verification of legal incorporation, licensing, and regulatory standing',
+                'Assessment of data protection and information security practices',
+                'Review of financial stability and operational track record',
+                'Anti-bribery and anti-corruption declarations',
+                'Execution of data processing agreements where personal data is involved',
+                'Contractual compliance obligations including audit rights',
+                'Periodic review and re-certification of active vendor relationships',
+              ]} />
+              <P>Venix does not maintain business relationships with entities that are sanctioned, unlicensed for their relevant activities, or known to be involved in fraudulent or criminal conduct.</P>
+            </Section>
+
+            <Section id="security" title="Information Security Compliance">
+              <P>Our information security programme is designed to protect the confidentiality, integrity, and availability of all data and systems. Key security controls include:</P>
+              <UL items={[
+                'Firewall protections and IP whitelisting for all API and enterprise system access',
+                'TLS/SSL encryption for all data in transit',
+                'Role-based access control (RBAC) with minimum-necessary access principles',
+                'Regular vulnerability assessments and penetration testing',
+                'Incident detection, response, and recovery procedures',
+                'Secure SDLC (Software Development Life Cycle) practices for platform development',
+                'Business continuity and disaster recovery planning',
+                'Employee security awareness training and acceptable use policies',
+              ]} />
+              <P>Security incidents are managed through our internal incident response team. Where a breach involves personal data, we follow statutory notification obligations under the NDPA to inform the NDPC and affected data subjects within required timescales.</P>
+            </Section>
+
+            <Section id="reporting" title="Compliance Reporting & Whistleblowing">
+              <P>Venix Partners Limited maintains a speak-up culture that encourages the reporting of compliance concerns, suspected misconduct, and regulatory breaches without fear of retaliation.</P>
+              <InfoBox icon="ðŸ“¢" title="How to Report">
+                Compliance concerns, suspected regulatory violations, data breaches, fraud, or other misconduct may be reported to our compliance team at hello@venixpartners.com with the subject line "Compliance Report". Reports may be made confidentially and will be reviewed by senior management with appropriate discretion.
+              </InfoBox>
+              <P>Our whistleblowing process includes:</P>
+              <UL items={[
+                'Confidential intake of concerns by designated compliance personnel',
+                'Impartial investigation of all substantive reports',
+                'Non-retaliation protection for good-faith reporters',
+                'Escalation to board level for material compliance issues',
+                'Regulatory disclosure where legally required',
+                'Feedback to reporters on investigation outcomes where permissible',
+              ]} />
+            </Section>
+
+            <Section id="contact" title="Compliance Contact">
+              <P>For compliance-related enquiries, regulatory correspondence, or to report a concern, please contact us at:</P>
+              <div style={{ background: 'linear-gradient(135deg, #1E3A8A, #1e3a8a)', borderRadius: 16, padding: '28px 32px', marginTop: 8 }}>
+                <p style={{ ...serif, fontSize: '1.2rem', color: '#fde68a', marginBottom: 12 }}>Venix Partners Limited</p>
+                <p style={{ ...sans, fontSize: 14, fontWeight: 300, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
+                  Compliance & Regulatory Affairs<br />
+                  35, Yesufu Sanusi Street, Off Adeniran Ogunsanya<br />
+                  Surulere, Lagos, Nigeria<br /><br />
+                  <a href="mailto:hello@venixpartners.com" style={{ color: '#FBBF24', fontWeight: 500 }}>hello@venixpartners.com</a><br />
+                  Subject line: <em style={{ color: 'rgba(255,255,255,0.5)' }}>Regulatory Communication / Compliance Enquiry</em>
+                </p>
+              </div>
+
+              {/* Quick links to other legal pages */}
+              <div style={{ marginTop: 32, padding: '24px 28px', background: 'rgba(251,191,36,0.06)', border: '1px solid rgba(251,191,36,0.2)', borderRadius: 14 }}>
+                <p style={{ ...sans, fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#1E3A8A', marginBottom: 16 }}>Related Legal Documents</p>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  {[
+                    { label: 'Privacy Policy', path: '/privacy' },
+                    { label: 'Terms of Use', path: '/terms' },
+                    { label: 'Contact Us', path: '/contact' },
+                  ].map(l => (
+                    <Link key={l.path} to={l.path} style={{ ...sans, display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none', background: '#fff', border: '1px solid rgba(30,58,138,0.15)', borderRadius: 8, padding: '8px 16px', transition: 'all 0.15s' }}>
+                      {l.label} â†’
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </Section>
+
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+=== ContactPage.tsx ===
+// â”€â”€â”€ ContactPage.tsx â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../components/ui/Container';
+import { MapPin, Phone, Mail, Clock, ExternalLink } from 'lucide-react';
+
+function useReveal(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('_vis', e.isIntersecting)),
+      { threshold: 0.1 }
+    );
+    ref.current?.querySelectorAll('._r,._rl,._rr').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [ref]);
+}
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  ._r  { opacity:0; transform:translateY(32px);  transition:opacity .75s ease,transform .75s ease; }
+  ._rl { opacity:0; transform:translateX(-52px); transition:opacity .8s  ease,transform .8s  ease; }
+  ._rr { opacity:0; transform:translateX( 52px); transition:opacity .8s  ease,transform .8s  ease; }
+  ._r._vis,._rl._vis,._rr._vis { opacity:1; transform:none; }
+  ._d1{transition-delay:.1s} ._d2{transition-delay:.2s} ._d3{transition-delay:.3s}
+  ._d4{transition-delay:.4s} ._d5{transition-delay:.5s} ._d6{transition-delay:.6s}
+  @keyframes _float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-13px)} }
+  ._float { animation:_float 5s ease-in-out infinite; }
+`;
+
+const serif = { fontFamily:"'DM Serif Display',Georgia,serif" } as const;
+
+function Eyebrow({ light, children }: { light?: boolean; children: React.ReactNode }) {
+  return (
+    <p className={`_r mb-4 flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[.14em] ${light ? 'text-yellow-400' : 'text-yellow-500'}`}>
+      <span className={`block h-[2px] w-6 ${light ? 'bg-yellow-400' : 'bg-yellow-500'}`} />
+      {children}
+    </p>
+  );
+}
+
+// â”€â”€ S1: HERO + CONTACT DETAILS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S1Hero() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  return (
+    <section ref={ref} className="relative overflow-hidden px-6 pb-24 pt-32 bg-blue-950">
+      <style>{CSS}</style>
+
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-950/80 to-blue-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 via-transparent to-blue-950/20" />
+      </div>
+
+      {/* Grid overlay */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px)',
+        backgroundSize: '56px 56px',
+        maskImage: 'linear-gradient(to right, black 0%, transparent 60%)',
+        WebkitMaskImage: 'linear-gradient(to right, black 0%, transparent 60%)',
+      }} />
+
+      {/* Left accent line */}
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-yellow-400/60 to-transparent" />
+
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          <div>
+            <span className="_r inline-flex items-center gap-2 rounded-full border border-yellow-400/30 bg-yellow-400/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-yellow-400 mb-5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-yellow-400" />Structured Engagement Â· By Appointment
+            </span>
+            <h1 className="_r _d1 mb-6 text-5xl leading-[1.07] text-white lg:text-6xl" style={serif}>
+              Let's Build<br /><em style={{ color: '#fde68a' }}>Something Together</em>
+            </h1>
+            <p className="_r _d2 mb-10 max-w-lg text-lg font-light leading-relaxed text-white/65">
+              Venix Partners Limited welcomes structured enquiries from telecom operators, financial institutions, fintech platforms, enterprise organizations, and strategic partners.
+            </p>
+
+            {/* Contact details */}
+            <div className="_r _d3 space-y-4">
+              <a href="mailto:hello@venixpartners.com" className="flex items-center gap-3 group">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 transition-all group-hover:bg-yellow-400/25"><Mail size={16} /></div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/35">Email</p>
+                  <p className="text-[15px] font-semibold text-white group-hover:text-yellow-300">hello@venixpartners.com</p>
+                </div>
+              </a>
+              <a href="tel:+2348025934298" className="flex items-center gap-3 group">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 transition-all group-hover:bg-yellow-400/25"><Phone size={16} /></div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/35">Telephone</p>
+                  <p className="text-[15px] font-semibold text-white group-hover:text-yellow-300">+234 802 593 4298</p>
+                </div>
+              </a>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-400/15 border border-yellow-400/30 text-yellow-400"><Clock size={16} /></div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/35">Business Hours</p>
+                  <p className="text-[15px] font-semibold text-white">Mon â€“ Fri, 9:00 AM â€“ 5:00 PM WAT</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-400/15 border border-yellow-400/30 text-yellow-400"><MapPin size={16} /></div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/35">Office</p>
+                  <p className="text-[14px] font-medium text-white/80">35, Yesufu Sanusi Street, Off Adeniran Ogunsanya,<br />Surulere, Lagos, Nigeria</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: floating info cards */}
+          <div className="relative hidden lg:flex flex-col gap-4 items-end">
+            <div className="_float rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 w-64 shadow-xl">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                </span>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400/80">Open by Appointment</p>
+              </div>
+              <p className="text-xl text-white" style={serif}>Venix Partners Limited</p>
+              <p className="text-[12px] text-white/45 mt-1">Surulere, Lagos Â· Nigeria</p>
+            </div>
+
+            <div className="rounded-2xl bg-blue-900/80 backdrop-blur-md border border-yellow-400/20 px-5 py-4 w-52 shadow-xl">
+              <p className="text-[9px] font-bold uppercase tracking-widest text-yellow-400 mb-1">Response Time</p>
+              <p className="text-base text-white" style={serif}>Within 1 Business Day</p>
+            </div>
+
+            <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 w-64 shadow-xl">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400/70 mb-3">Enquiry Channels</p>
+              <div className="space-y-2">
+                {['Enterprise & Institutional','Platform Partnerships','Media & PR','Compliance & Governance'].map(ch => (
+                  <div key={ch} className="flex items-center gap-2">
+                    <span className="h-1 w-1 rounded-full bg-yellow-400 shrink-0" />
+                    <span className="text-[12px] text-white/60">{ch}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S2: ENQUIRY TYPES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S2EnquiryTypes() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const enquiries = [
+    { icon:'ðŸ¢', title:'Enterprise & Institutional', subject:'Enterprise Infrastructure Inquiry', desc:'For telecom operators, financial institutions, fintech platforms, and enterprise organizations.', fields:['Organization name','Nature of business','Proposed scope of engagement','Expected transaction volume (if applicable)','Technical contact details','Regulatory considerations'] },
+    { icon:'â˜ï¸', title:'Venix Cloud & API Integration', subject:'Venix Cloud Integration Request', desc:'For organizations seeking integration with Venix Cloud enterprise e-top-up and digital vending infrastructure.', fields:['Organization name','Integration objective','API use case','Estimated monthly transaction volume','Technical contact person','Deployment timeline'] },
+    { icon:'ðŸ’¬', title:'Messaging & Communication', subject:'Enterprise Messaging Enquiry', desc:'For Mesaj platform enquiries relating to bulk SMS, transactional messaging, route stability, and messaging partnerships.', fields:['Expected message volume','Integration requirements','Technical contact details','Timeline'] },
+    { icon:'ðŸ¤', title:'Platform Partnerships', subject:'Platform Partnership Request', desc:'For BingeBay content distribution, Turnaj gaming partnerships, FinSight collaboration, and CRBT deployments.', fields:['Partnership objectives','Relevant background','Platform of interest','Proposed collaboration model'] },
+    { icon:'ðŸ“°', title:'Media & Public Relations', subject:'Media Enquiry', desc:'For media interviews, industry commentary, or corporate statements.', fields:['Media organization','Nature of inquiry','Deadline (if applicable)','Contact details'] },
+    { icon:'âš–ï¸', title:'Compliance & Governance', subject:'Regulatory Communication', desc:'For regulatory or formal compliance-related correspondence reviewed in accordance with internal governance procedures.', fields:['Regulatory body or authority','Nature of correspondence','Reference numbers (if applicable)'] },
+  ];
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <section ref={ref} className="overflow-hidden bg-white px-6 py-24">
+      <Container>
+        <div className="mb-14 text-center">
+          <Eyebrow>Enquiry Types</Eyebrow>
+          <h2 className="_r _d1 mb-5 text-4xl leading-[1.1] text-blue-900 lg:text-[2.75rem]" style={serif}>Structured Engagement for Every Need</h2>
+          <p className="_r _d2 mx-auto max-w-lg text-[15px] font-light leading-relaxed text-blue-900/65">All correspondence should be directed to <strong>hello@venixpartners.com</strong> with the relevant subject line indicated below.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {enquiries.map((e, i) => (
+            <div key={e.title} className={`_r _d${Math.min(i+1,6)} rounded-2xl border border-blue-900/10 transition-all duration-200 hover:border-yellow-400/40 hover:shadow-lg hover:shadow-yellow-400/8`}>
+              <button className="flex w-full items-start gap-4 p-6 text-left" onClick={() => setExpanded(expanded === i ? null : i)}>
+                <span className="text-2xl mt-0.5 shrink-0">{e.icon}</span>
+                <div className="flex-1">
+                  <p className="text-[15px] font-semibold text-blue-900 mb-1" style={serif}>{e.title}</p>
+                  <p className="text-[13px] font-light text-blue-900/60">{e.desc}</p>
+                </div>
+                <span className={`shrink-0 text-blue-900/30 transition-transform duration-200 text-lg ${expanded === i ? 'rotate-180' : ''}`}>âŒ„</span>
+              </button>
+              {expanded === i && (
+                <div className="border-t border-blue-900/8 px-6 pb-6 pt-4">
+                  <div className="mb-4 flex items-center gap-2 rounded-lg bg-yellow-400/10 border border-yellow-400/20 px-3 py-2">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-yellow-600">Subject Line:</span>
+                    <span className="text-[12px] font-semibold text-blue-900">{e.subject}</span>
+                  </div>
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-blue-900/40">Please Include:</p>
+                  <ul className="space-y-1.5">{e.fields.map(f => (<li key={f} className="flex items-start gap-2 text-[13px] text-blue-900/65"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400" />{f}</li>))}</ul>
+                  <a href={`mailto:hello@venixpartners.com?subject=${encodeURIComponent(e.subject)}`} className="mt-4 inline-flex items-center gap-2 rounded-lg bg-blue-900 px-4 py-2.5 text-[12px] font-bold text-white transition-all hover:bg-blue-950">
+                    Send This Enquiry <ExternalLink size={12} />
+                  </a>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S3: CONTACT FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S3Form() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const [form, setForm] = useState({ name:'', org:'', email:'', type:'Enterprise Infrastructure Inquiry', message:'' });
+  const [sent, setSent] = useState(false);
+  const [errors, setErrors] = useState<{ [k: string]: string }>({});
+
+  const validate = () => {
+    const e: { [k: string]: string } = {};
+    if (!form.name.trim()) e.name = 'Name is required';
+    if (!form.email.trim()) e.email = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Enter a valid email address';
+    if (!form.message.trim()) e.message = 'Message is required';
+    return e;
+  };
+
+  const handleSubmit = () => {
+    const e = validate();
+    if (Object.keys(e).length > 0) { setErrors(e); return; }
+    setErrors({});
+    const subject = encodeURIComponent(form.type);
+    const body = encodeURIComponent(`Name: ${form.name}\nOrganization: ${form.org}\nEmail: ${form.email}\n\n${form.message}`);
+    window.location.href = `mailto:hello@venixpartners.com?subject=${subject}&body=${body}`;
+    setSent(true);
+  };
+
+  const handleChange = (field: string, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) setErrors(prev => { const n = { ...prev }; delete n[field]; return n; });
+  };
+
+  const types = ['Enterprise Infrastructure Inquiry','Venix Cloud Integration Request','Enterprise Messaging Enquiry','Platform Partnership Request','Media Enquiry','Regulatory Communication','General Enquiry'];
+
+  const inputClass = (field: string) =>
+    `w-full rounded-xl border px-4 py-3 text-[14px] text-blue-900 placeholder-blue-900/40 outline-none transition-all bg-white/90 focus:bg-white ${errors[field] ? 'border-red-400/60 focus:border-red-400' : 'border-white/40 focus:border-yellow-400'}`;
+
+  return (
+    <section ref={ref} className="relative overflow-hidden bg-blue-900 px-6 py-24">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage:'linear-gradient(rgba(251,191,36,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.04) 1px,transparent 1px)', backgroundSize:'56px 56px' }} />
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+          <div className="flex flex-col justify-center">
+            <Eyebrow light>Get in Touch</Eyebrow>
+            <h2 className="_r _d1 mb-6 text-4xl leading-[1.1] text-yellow-100 lg:text-5xl" style={serif}>Start a Structured Conversation</h2>
+            <p className="_r _d2 mb-8 text-[15px] font-light leading-relaxed text-white/60">Venix Partners Limited prioritizes disciplined, structured engagement with all stakeholders. As a regulated NCC VAS license holder, we maintain defined engagement procedures to ensure compliance, operational clarity, and responsible collaboration.</p>
+            <div className="_r _d3 space-y-4">
+              {[{ icon:'ðŸ“…', text:'All meetings are by scheduled appointment only.' },{ icon:'ðŸ¢', text:'Physical visits to our Surulere office require prior confirmation via email.' },{ icon:'â±ï¸', text:'We review all enquiries and respond through the appropriate technical or commercial channel.' }].map(n => (
+                <div key={n.text} className="flex items-start gap-3"><span className="text-lg mt-0.5">{n.icon}</span><span className="text-[14px] font-light text-white/65">{n.text}</span></div>
+              ))}
+            </div>
+            <div className="_r _d4 mt-8 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-100 p-6">
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-blue-900/55">General Enquiries</p>
+              <a href="mailto:hello@venixpartners.com" className="flex items-center gap-2 text-lg font-semibold text-blue-900 hover:underline" style={serif}>hello@venixpartners.com <ExternalLink size={16} /></a>
+              <p className="mt-1 text-[12px] text-blue-900/55">Subject line: <em>General Enquiry</em></p>
+            </div>
+          </div>
+          <div className="_r _d2">
+            {sent ? (
+              <div className="flex h-full items-center justify-center rounded-3xl border border-yellow-400/20 bg-white/5 p-10 text-center">
+                <div>
+                  <span className="text-5xl block mb-4">âœ…</span>
+                  <h3 className="text-2xl text-yellow-100 mb-3" style={serif}>Enquiry Initiated</h3>
+                  <p className="text-[14px] text-white/60">Your email client should have opened. Please send the email to complete your enquiry.</p>
+                  <button onClick={() => { setSent(false); setForm({ name:'', org:'', email:'', type:'Enterprise Infrastructure Inquiry', message:'' }); }} className="mt-6 rounded-lg bg-yellow-400 px-5 py-2.5 text-sm font-bold text-blue-900 hover:bg-yellow-300">Send Another</button>
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-8">
+                <h3 className="mb-6 text-xl text-yellow-100" style={serif}>Send an Enquiry</h3>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/40">Full Name *</label>
+                      <input value={form.name} onChange={e => handleChange('name', e.target.value)} placeholder="Your name" autoComplete="name" className={inputClass('name')} />
+                      {errors.name && <p className="mt-1 text-[11px] text-red-400">{errors.name}</p>}
+                    </div>
+                    <div>
+                      <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/40">Organization</label>
+                      <input value={form.org} onChange={e => handleChange('org', e.target.value)} placeholder="Company name" autoComplete="organization" className={inputClass('org')} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/40">Email Address *</label>
+                    <input type="email" value={form.email} onChange={e => handleChange('email', e.target.value)} placeholder="you@company.com" autoComplete="email" className={inputClass('email')} />
+                    {errors.email && <p className="mt-1 text-[11px] text-red-400">{errors.email}</p>}
+                  </div>
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/40">Enquiry Type</label>
+                    <select value={form.type} onChange={e => handleChange('type', e.target.value)} className="w-full rounded-xl border border-white/40 bg-white/90 px-4 py-3 text-[14px] text-blue-900 outline-none transition-all focus:border-yellow-400 focus:bg-white">
+                      {types.map(t => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="mb-1.5 block text-[11px] font-bold uppercase tracking-widest text-white/40">Message *</label>
+                    <textarea value={form.message} onChange={e => handleChange('message', e.target.value)} rows={4} placeholder="Describe your engagement objectives, scope, and any relevant technical or regulatory context..." className={`${inputClass('message')} resize-none`} />
+                    {errors.message && <p className="mt-1 text-[11px] text-red-400">{errors.message}</p>}
+                  </div>
+                  <button onClick={handleSubmit} className="w-full rounded-xl bg-yellow-400 py-3.5 text-[14px] font-bold text-blue-900 transition-all hover:bg-yellow-300 hover:-translate-y-0.5">Send Enquiry â†’</button>
+                  <p className="text-center text-[11px] text-white/30">This will open your email client with the enquiry pre-filled.</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S4: OFFICE + MAP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S4Office() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  return (
+    <section ref={ref} className="overflow-hidden px-6 py-24" style={{ background:'linear-gradient(135deg,#FBBF24 0%,#FEF3C7 100%)' }}>
+      <Container>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
+          <div>
+            <Eyebrow>Our Office</Eyebrow>
+            <h2 className="_r _d1 mb-5 text-4xl leading-[1.1] text-blue-900 lg:text-[2.75rem]" style={serif}>Visit Us in Surulere, Lagos</h2>
+            <p className="_r _d2 mb-8 text-[15px] font-light leading-relaxed text-blue-900/70">All physical visits to our Surulere office location are strictly by prior appointment confirmation. Visitors are advised to confirm scheduling via email before arrival.</p>
+            <div className="_r _d3 space-y-5">
+              <div className="flex items-start gap-4 rounded-2xl border border-blue-900/10 bg-white/60 p-5">
+                <MapPin size={18} className="mt-0.5 shrink-0 text-yellow-500" />
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-blue-900/45 mb-1">Registered Office</p>
+                  <p className="text-[14px] font-medium leading-relaxed text-blue-900">35, Yesufu Sanusi Street<br />Off Adeniran Ogunsanya<br />Surulere, Lagos, Nigeria</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <a href="tel:+2348025934298" className="group flex items-center gap-3 rounded-xl border border-blue-900/10 bg-white/60 p-4 transition-all hover:border-yellow-400/40">
+                  <Phone size={16} className="text-yellow-500 shrink-0" />
+                  <div><p className="text-[10px] font-bold uppercase tracking-widest text-blue-900/40">Call</p><p className="text-[13px] font-semibold text-blue-900 group-hover:text-blue-700">+234 802 593 4298</p></div>
+                </a>
+                <a href="mailto:hello@venixpartners.com" className="group flex items-center gap-3 rounded-xl border border-blue-900/10 bg-white/60 p-4 transition-all hover:border-yellow-400/40">
+                  <Mail size={16} className="text-yellow-500 shrink-0" />
+                  <div><p className="text-[10px] font-bold uppercase tracking-widest text-blue-900/40">Email</p><p className="text-[13px] font-semibold text-blue-900 group-hover:text-blue-700 truncate">hello@venixpartners.com</p></div>
+                </a>
+              </div>
+              <div className="flex items-center gap-4 rounded-2xl border border-blue-900/10 bg-white/60 p-5">
+                <Clock size={18} className="shrink-0 text-yellow-500" />
+                <div>
+                  <div className="flex items-center gap-2 mb-1"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" /><span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" /></span><p className="text-[11px] font-bold uppercase tracking-widest text-blue-900/45">Open Today</p></div>
+                  <p className="text-[14px] font-medium text-blue-900">Monday â€“ Friday Â· 9:00 AM â€“ 5:00 PM WAT</p>
+                  <p className="text-[12px] text-blue-900/50 mt-1">Meetings by scheduled appointment only</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="_rr relative overflow-hidden rounded-3xl shadow-2xl shadow-blue-900/20">
+            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lagos Nigeria" className="h-[480px] w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <p className="text-2xl text-white mb-1" style={serif}>Surulere, Lagos</p>
+              <p className="text-[13px] font-light text-white/65 mb-4">Nigeria's Commercial Capital</p>
+              <a href="https://maps.google.com/?q=Yesufu+Sanusi+Street+Surulere+Lagos" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-lg bg-yellow-400 px-4 py-2.5 text-[12px] font-bold text-blue-900 transition-all hover:bg-yellow-300">
+                Open in Google Maps <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S5: ENGAGEMENT PHILOSOPHY + CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S5Philosophy() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  return (
+    <section ref={ref} className="relative overflow-hidden bg-blue-900 px-6 py-24">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage:'linear-gradient(rgba(251,191,36,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.04) 1px,transparent 1px)', backgroundSize:'56px 56px' }} />
+      <Container className="relative z-10 text-center">
+        <Eyebrow light>Engagement Philosophy</Eyebrow>
+        <h2 className="_r _d1 mx-auto mb-6 max-w-3xl text-4xl leading-[1.1] text-yellow-100 lg:text-5xl" style={serif}>Disciplined, Structured Engagement With All Stakeholders</h2>
+        <p className="_r _d2 mx-auto mb-10 max-w-2xl text-[15px] font-light leading-relaxed text-white/60">As a regulated NCC VAS license holder operating within telecom-integrated infrastructure environments, we maintain defined engagement procedures to ensure compliance, operational clarity, and responsible collaboration.</p>
+        <div className="_r _d3 flex flex-wrap justify-center gap-3 mb-12">
+          {['Regulatory compliance','Operational clarity','Responsible collaboration','Structured documentation','Performance accountability'].map(p => (
+            <span key={p} className="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-4 py-2 text-[12px] font-semibold text-yellow-400">{p}</span>
+          ))}
+        </div>
+        <div className="_r _d4 flex flex-wrap justify-center gap-4">
+          <a href="mailto:hello@venixpartners.com" className="rounded-xl bg-yellow-400 px-8 py-3.5 text-[15px] font-bold text-blue-900 shadow-lg shadow-yellow-400/20 transition-all hover:bg-yellow-300 hover:-translate-y-0.5">hello@venixpartners.com</a>
+          <Link to="/services" className="rounded-xl border-2 border-white/20 px-8 py-3.5 text-[15px] font-semibold text-white transition-all hover:border-yellow-400/40 hover:text-yellow-400">View Our Services</Link>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export default function ContactPage() {
+  return <><S1Hero /><S2EnquiryTypes /><S3Form /><S4Office /><S5Philosophy /></>;
+}
+
+=== HomePage.tsx ===
+import Hero from '../components/home/Hero';
+import Features from '../components/home/Features';
+import PersonalBanking from '../components/home/PersonalBanking';
+import BusinessBanking from '../components/home/BusinessBanking';
+import AppPromo from '../components/home/AppPromo';
+import Testimonials from '../components/home/Testimonials';
+import NewSection from '../components/home/NewSection';
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Features />
+      <PersonalBanking />
+      <BusinessBanking />
+      <NewSection />
+      <Testimonials />
+      <AppPromo />
+    </>
+  );
+}
+
+=== PersonalPage.tsx ===
+import Container from '../components/ui/Container';
+import SectionHeading from '../components/ui/SectionHeading';
+
+export default function PersonalPage() {
+  return (
+    <div className="pt-32">
+      <Container>
+        <SectionHeading
+          title="Personal Banking"
+          subtitle="Banking solutions designed for your personal financial needs"
+          centered={true}
+        />
+        {/* Placeholder content - implement full personal banking page content later */}
+        <div className="text-center py-12">
+          <p className="text-gray-600">Personal banking content coming soon...</p>
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+=== PrivacyPolicyPage.tsx ===
+// â”€â”€â”€ PrivacyPolicyPage.tsx â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../components/ui/Container';
+
+function useReveal(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('_vis', e.isIntersecting)),
+      { threshold: 0.08 }
+    );
+    ref.current?.querySelectorAll('._r').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [ref]);
+}
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  ._r { opacity:0; transform:translateY(20px); transition:opacity .65s ease,transform .65s ease; }
+  ._r._vis { opacity:1; transform:none; }
+  ._d1{transition-delay:.05s} ._d2{transition-delay:.1s} ._d3{transition-delay:.15s} ._d4{transition-delay:.2s}
+`;
+const serif = { fontFamily:"'DM Serif Display',Georgia,serif" } as const;
+const sans  = { fontFamily:"'DM Sans',sans-serif" } as const;
+
+const sections = [
+  { id:'overview',      label:'Overview' },
+  { id:'collection',    label:'Data We Collect' },
+  { id:'use',           label:'How We Use Data' },
+  { id:'sharing',       label:'Data Sharing' },
+  { id:'retention',     label:'Data Retention' },
+  { id:'security',      label:'Security' },
+  { id:'rights',        label:'Your Rights' },
+  { id:'cookies',       label:'Cookies' },
+  { id:'children',      label:'Children' },
+  { id:'changes',       label:'Policy Changes' },
+  { id:'contact',       label:'Contact Us' },
+];
+
+function SideNav({ active }: { active: string }) {
+  return (
+    <nav className="sticky top-28 hidden xl:block w-56 shrink-0">
+      <p style={{ ...sans, fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#FBBF24', marginBottom: 16 }}>On This Page</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {sections.map(s => (
+          <a
+            key={s.id}
+            href={`#${s.id}`}
+            style={{
+              ...sans,
+              fontSize: 13,
+              fontWeight: active === s.id ? 600 : 400,
+              color: active === s.id ? '#1E3A8A' : '#6B7280',
+              padding: '6px 12px',
+              borderRadius: 8,
+              borderLeft: `2px solid ${active === s.id ? '#FBBF24' : 'transparent'}`,
+              textDecoration: 'none',
+              transition: 'all 0.15s',
+              background: active === s.id ? 'rgba(251,191,36,0.08)' : 'transparent',
+            }}
+          >
+            {s.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useReveal(ref as any);
+  return (
+    <div ref={ref} id={id} style={{ marginBottom: 56, scrollMarginTop: 100 }}>
+      <div className="_r" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+        <span style={{ display: 'block', height: 2, width: 24, background: '#FBBF24', flexShrink: 0 }} />
+        <h2 style={{ ...serif, fontSize: '1.5rem', color: '#1E3A8A', lineHeight: 1.2 }}>{title}</h2>
+      </div>
+      <div className="_r _d1">{children}</div>
+    </div>
+  );
+}
+
+function P({ children }: { children: React.ReactNode }) {
+  return <p style={{ ...sans, fontSize: 15, fontWeight: 300, lineHeight: 1.85, color: '#374151', marginBottom: 16 }}>{children}</p>;
+}
+function UL({ items }: { items: string[] }) {
+  return (
+    <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none' }}>
+      {items.map(item => (
+        <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 8 }}>
+          <span style={{ marginTop: 8, height: 6, width: 6, borderRadius: '50%', background: '#FBBF24', flexShrink: 0 }} />
+          <span style={{ ...sans, fontSize: 14, fontWeight: 300, lineHeight: 1.7, color: '#374151' }}>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+function InfoBox({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ background: 'rgba(30,58,138,0.04)', border: '1px solid rgba(30,58,138,0.1)', borderRadius: 12, padding: '16px 20px', marginBottom: 20 }}>
+      <p style={{ ...sans, fontSize: 14, fontWeight: 300, lineHeight: 1.75, color: '#1E3A8A' }}>{children}</p>
+    </div>
+  );
+}
+
+export default function PrivacyPolicyPage() {
+  const [active, setActive] = useState('overview');
+
+  useEffect(() => {
+    const handler = () => {
+      for (const s of [...sections].reverse()) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top <= 140) { setActive(s.id); break; }
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  return (
+    <div style={{ ...sans, minHeight: '100vh', background: '#fff' }}>
+      <style>{CSS}</style>
+
+      {/* â”€â”€ HERO â”€â”€ */}
+      <div className="relative overflow-hidden bg-blue-950" style={{ paddingTop: 128, paddingBottom: 64, paddingLeft: 24, paddingRight: 24 }}>
+        <div className="absolute inset-0">
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.98) 0%, rgba(30,58,138,0.6) 100%)' }} />
+        </div>
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px)', backgroundSize: '56px 56px' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(251,191,36,.6) 30%, rgba(251,191,36,.6) 70%, transparent)' }} />
+        <Container className="relative z-10">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(251,191,36,0.1)', border: '1.5px solid rgba(251,191,36,0.3)', borderRadius: 100, padding: '6px 16px', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FBBF24', marginBottom: 24 }}>
+            ðŸ”’ Legal Â· Privacy
+          </span>
+          <h1 style={{ ...serif, fontSize: 'clamp(2.4rem, 5vw, 4rem)', color: '#fff', lineHeight: 1.06, marginBottom: 16, maxWidth: 640 }}>
+            Privacy Policy
+          </h1>
+          <p style={{ ...sans, fontSize: 15, fontWeight: 300, color: 'rgba(255,255,255,0.6)', maxWidth: 520, lineHeight: 1.8, marginBottom: 24 }}>
+            This Privacy Policy explains how Venix Partners Limited collects, uses, stores, and protects personal information obtained through our platforms, services, and digital interactions.
+          </p>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+            <span style={{ ...sans, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.35)' }}>Effective Date: January 1, 2025</span>
+            <span style={{ ...sans, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.35)' }}>Last Updated: March 2025</span>
+            <span style={{ ...sans, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.35)' }}>Version 1.0</span>
+          </div>
+        </Container>
+      </div>
+
+      {/* â”€â”€ BODY â”€â”€ */}
+      <Container>
+        <div style={{ display: 'flex', gap: 64, paddingTop: 64, paddingBottom: 100, alignItems: 'flex-start' }}>
+          <SideNav active={active} />
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+
+            <Section id="overview" title="Overview">
+              <InfoBox>
+                Venix Partners Limited ("Venix", "we", "our", or "us") is incorporated and operates within Nigeria under applicable regulatory frameworks including those administered by the Nigerian Communications Commission (NCC). We are committed to protecting your privacy and processing personal data responsibly, transparently, and in compliance with applicable Nigerian data protection laws including the Nigeria Data Protection Regulation (NDPR) and the Nigeria Data Protection Act (NDPA).
+              </InfoBox>
+              <P>This policy applies to all individuals who interact with our platforms, services, websites, APIs, or enterprise systems â€” including clients, partners, platform users, job applicants, and website visitors.</P>
+              <P>By accessing or using any Venix service, you acknowledge that you have read and understood this Privacy Policy. If you do not agree with any part of this policy, please discontinue use of our services and contact us at <strong>hello@venixpartners.com</strong>.</P>
+            </Section>
+
+            <Section id="collection" title="Data We Collect">
+              <P>We collect personal data only where it is necessary for a legitimate purpose related to our services. The categories of data we may collect include:</P>
+              <p style={{ ...sans, fontSize: 13, fontWeight: 700, color: '#1E3A8A', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Identity & Contact Information</p>
+              <UL items={['Full name, business name, and role/title','Email address, telephone number, and physical address','Government-issued ID details (where required for compliance verification)','NIN, BVN, or other regulatory identifiers (where applicable and legally required)']} />
+              <p style={{ ...sans, fontSize: 13, fontWeight: 700, color: '#1E3A8A', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Technical & Usage Data</p>
+              <UL items={['IP addresses and device identifiers','Browser type, operating system, and access timestamps','API usage logs, transaction reference numbers, and system interaction data','Cookies and similar tracking technologies (see Cookies section)']} />
+              <p style={{ ...sans, fontSize: 13, fontWeight: 700, color: '#1E3A8A', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Transaction & Financial Data</p>
+              <UL items={['Transactional records for airtime, data, utilities, and digital services','Payment references and billing data processed through authorized channels','Account and subscription details where applicable']} />
+              <p style={{ ...sans, fontSize: 13, fontWeight: 700, color: '#1E3A8A', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Employment & Application Data</p>
+              <UL items={['CV/resume, cover letters, and employment history (for job applicants)','References and professional background information','Communications exchanged during recruitment processes']} />
+            </Section>
+
+            <Section id="use" title="How We Use Your Data">
+              <P>We process personal data only for specific, legitimate, and disclosed purposes. We do not use personal data for purposes incompatible with those stated at the time of collection.</P>
+              <UL items={[
+                'To deliver, manage, and improve our digital platforms and enterprise services',
+                'To process and fulfill transactions and service requests',
+                'To comply with NCC licensing conditions and other applicable regulatory obligations',
+                'To communicate with clients, partners, and users regarding service matters',
+                'To conduct identity verification and anti-fraud checks where legally required',
+                'To evaluate and process employment applications',
+                'To send service-related notices, updates, and technical alerts',
+                'To maintain records for audit, compliance, and governance purposes',
+                'To analyse service performance and improve system reliability and security',
+              ]} />
+              <InfoBox>We do not sell personal data to third parties. We do not use personal data for unsolicited marketing without explicit consent. Venix products and services are ad-free and we do not engage in targeted advertising.</InfoBox>
+            </Section>
+
+            <Section id="sharing" title="Data Sharing & Disclosure">
+              <P>We may share personal data with third parties only under the following circumstances:</P>
+              <UL items={[
+                'Telecom network partners (MTN, Airtel, Glo, 9mobile) â€” solely for the purpose of fulfilling telecom-integrated transactions and maintaining compliant network access',
+                'Regulated payment processors and financial institutions â€” where required for transaction completion or compliance reporting',
+                'Technology infrastructure providers â€” cloud hosting, API gateway providers, and system management partners operating under data processing agreements',
+                'Regulatory authorities and law enforcement â€” where required under applicable Nigerian law, court order, or NCC directive',
+                'Professional advisors â€” legal, audit, and compliance professionals bound by confidentiality obligations',
+                'Successor entities â€” in the event of a corporate restructuring, merger, or acquisition',
+              ]} />
+              <P>All third-party processors engaged by Venix are required to maintain data protection standards consistent with applicable Nigerian data protection law. We do not share data with international parties unless adequate protection mechanisms are in place.</P>
+            </Section>
+
+            <Section id="retention" title="Data Retention">
+              <P>We retain personal data only for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable law or regulatory obligation.</P>
+              <UL items={[
+                'Transactional records: minimum 7 years (in compliance with Nigerian financial recordkeeping requirements)',
+                'Client and partner data: duration of the commercial relationship plus 5 years',
+                'Job applicant data: 6 months following the conclusion of the recruitment process (or longer with explicit consent)',
+                'System logs and API access records: 12 months, unless extended for security or compliance investigation purposes',
+                'Marketing communications consent records: duration of consent plus 2 years',
+              ]} />
+              <P>Upon expiry of the applicable retention period, personal data is securely deleted or anonymised in accordance with our internal data lifecycle procedures.</P>
+            </Section>
+
+            <Section id="security" title="Security Measures">
+              <P>Venix implements technical and organisational measures to protect personal data against unauthorised access, loss, alteration, or disclosure. Our security practices include:</P>
+              <UL items={[
+                'Firewall protections and IP whitelisting for API and system access',
+                'Encryption of data in transit using industry-standard TLS protocols',
+                'Access controls with role-based permissions and authentication requirements',
+                'Regular internal security reviews and infrastructure audits',
+                'Incident response procedures for data breach detection and notification',
+                'Secure server environments with managed hosting infrastructure',
+              ]} />
+              <InfoBox>While we implement robust security practices, no system is entirely immune to risk. We encourage users to report any suspected security concerns to us immediately at hello@venixpartners.com.</InfoBox>
+            </Section>
+
+            <Section id="rights" title="Your Rights">
+              <P>Under the Nigeria Data Protection Act (NDPA) and the NDPR, individuals whose personal data we process have the following rights:</P>
+              <UL items={[
+                'Right of Access â€” to request a copy of personal data we hold about you',
+                'Right to Rectification â€” to request correction of inaccurate or incomplete data',
+                'Right to Erasure â€” to request deletion of personal data, subject to legal retention obligations',
+                'Right to Restriction â€” to request that we limit the processing of your data in certain circumstances',
+                'Right to Data Portability â€” to receive your data in a structured, commonly used format',
+                'Right to Object â€” to object to processing based on legitimate interest or for direct marketing',
+                'Right to Withdraw Consent â€” where processing is based on consent, you may withdraw it at any time',
+              ]} />
+              <P>To exercise any of these rights, please contact our Data Protection Officer at <strong>hello@venixpartners.com</strong> with the subject line "Data Subject Request". We will respond within 30 days in accordance with applicable law.</P>
+            </Section>
+
+            <Section id="cookies" title="Cookies & Tracking Technologies">
+              <P>Our digital platforms and websites may use cookies and similar technologies to enhance user experience, analyse traffic, and maintain session state. Categories of cookies we use include:</P>
+              <UL items={[
+                'Strictly Necessary Cookies â€” required for platform functionality and security',
+                'Analytical/Performance Cookies â€” used to understand how users interact with our platforms (anonymised)',
+                'Functional Cookies â€” to remember user preferences and session settings',
+              ]} />
+              <P>We do not use third-party advertising or tracking cookies. You may configure your browser to refuse or delete cookies, though this may affect platform functionality. Where required by law, we obtain consent before placing non-essential cookies.</P>
+            </Section>
+
+            <Section id="children" title="Children's Privacy">
+              <P>Our services are designed exclusively for business and enterprise use. We do not knowingly collect personal data from individuals under the age of 18. If we become aware that personal data has been collected from a minor, we will take immediate steps to delete it. If you believe we have inadvertently collected data from a minor, please contact us immediately.</P>
+            </Section>
+
+            <Section id="changes" title="Changes to This Policy">
+              <P>We may update this Privacy Policy from time to time to reflect changes in our services, regulatory requirements, or operational practices. When material changes are made, we will:</P>
+              <UL items={[
+                'Update the "Last Updated" date at the top of this policy',
+                'Post the revised policy on our website with a version number',
+                'Notify active enterprise clients and platform users where practically feasible',
+              ]} />
+              <P>Your continued use of our services following notification of changes constitutes acceptance of the revised policy. We recommend reviewing this policy periodically.</P>
+            </Section>
+
+            <Section id="contact" title="Contact Us">
+              <P>For any privacy-related queries, data subject requests, or to report a concern, please contact:</P>
+              <div style={{ background: 'linear-gradient(135deg, #1E3A8A, #1e3a8a)', borderRadius: 16, padding: '28px 32px', marginTop: 8 }}>
+                <p style={{ ...serif, fontSize: '1.2rem', color: '#fde68a', marginBottom: 12 }}>Venix Partners Limited</p>
+                <p style={{ ...sans, fontSize: 14, fontWeight: 300, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
+                  Data Protection Officer<br />
+                  35, Yesufu Sanusi Street, Off Adeniran Ogunsanya<br />
+                  Surulere, Lagos, Nigeria<br /><br />
+                  <a href="mailto:hello@venixpartners.com" style={{ color: '#FBBF24', fontWeight: 500 }}>hello@venixpartners.com</a><br />
+                  Subject line: <em style={{ color: 'rgba(255,255,255,0.5)' }}>Privacy Enquiry / Data Subject Request</em>
+                </p>
+              </div>
+              <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(30,58,138,0.1)', display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <Link to="/terms" style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none' }}>Terms of Use â†’</Link>
+                <Link to="/compliance" style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none' }}>Compliance â†’</Link>
+                <Link to="/contact" style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none' }}>Contact Us â†’</Link>
+              </div>
+            </Section>
+
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+=== ServicesPage.tsx ===
+// â”€â”€â”€ ServicesPage.tsx â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../components/ui/Container';
+
+function useReveal(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('_vis', e.isIntersecting)),
+      { threshold: 0.1 }
+    );
+    ref.current?.querySelectorAll('._r,._rl,._rr').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [ref]);
+}
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  ._r  { opacity:0; transform:translateY(32px);  transition:opacity .75s ease,transform .75s ease; }
+  ._rl { opacity:0; transform:translateX(-52px); transition:opacity .8s  ease,transform .8s  ease; }
+  ._rr { opacity:0; transform:translateX( 52px); transition:opacity .8s  ease,transform .8s  ease; }
+  ._r._vis,._rl._vis,._rr._vis { opacity:1; transform:none; }
+  ._d1{transition-delay:.1s} ._d2{transition-delay:.2s} ._d3{transition-delay:.3s}
+  ._d4{transition-delay:.4s} ._d5{transition-delay:.5s} ._d6{transition-delay:.6s}
+  @keyframes _float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-13px)} }
+  ._float { animation:_float 5s ease-in-out infinite; }
+`;
+
+const serif = { fontFamily:"'DM Serif Display',Georgia,serif" } as const;
+
+function Eyebrow({ light, children }: { light?: boolean; children: React.ReactNode }) {
+  return (
+    <p className={`_r mb-4 flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[.14em] ${light ? 'text-yellow-400' : 'text-yellow-500'}`}>
+      <span className={`block h-[2px] w-6 ${light ? 'bg-yellow-400' : 'bg-yellow-500'}`} />
+      {children}
+    </p>
+  );
+}
+function H2({ light, delay = '_d1', children }: { light?: boolean; delay?: string; children: React.ReactNode }) {
+  return <h2 className={`_r ${delay} mb-5 text-4xl leading-[1.1] lg:text-[2.75rem] ${light ? 'text-yellow-50' : 'text-blue-900'}`} style={serif}>{children}</h2>;
+}
+
+// â”€â”€ S1: HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S1Hero() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const industries = ['Telecommunications','Financial Services & Fintech','Digital Payment Operators','Enterprise Technology','Media & Content','Gaming & Interactive','Public Sector','High-Volume Transaction'];
+  return (
+    <section ref={ref} className="relative overflow-hidden px-6 pb-24 pt-32 bg-blue-950">
+      <style>{CSS}</style>
+
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-950/80 to-blue-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/60 via-transparent to-blue-950/20" />
+      </div>
+
+      <div className="absolute inset-0 pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px)',
+        backgroundSize: '56px 56px',
+        maskImage: 'linear-gradient(to right, black 0%, transparent 60%)',
+        WebkitMaskImage: 'linear-gradient(to right, black 0%, transparent 60%)',
+      }} />
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-yellow-400/60 to-transparent" />
+
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          <div>
+            <span className="_r inline-flex items-center gap-2 rounded-full border border-yellow-400/30 bg-yellow-400/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-yellow-400 mb-5">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-yellow-400" />Enterprise Infrastructure Services
+            </span>
+            <h1 className="_r _d1 mb-6 text-5xl leading-[1.07] text-white lg:text-6xl" style={serif}>
+              Enterprise<br /><em style={{color:'#fde68a'}}>Technology Services</em>
+            </h1>
+            <p className="_r _d2 mb-8 max-w-lg text-lg font-light leading-relaxed text-white/65">
+              Venix Partners Limited delivers structured infrastructure and technology services designed to support enterprise digital transformation, telecom integration, and high-volume transaction environments â€” from strategy through deployment.
+            </p>
+            <div className="_r _d3 flex flex-wrap gap-3">
+              <Link to="/contact" className="rounded-lg bg-yellow-400 px-6 py-3 text-sm font-bold text-blue-950 shadow-lg shadow-yellow-400/25 transition-all hover:-translate-y-0.5 hover:bg-yellow-300">Discuss an Engagement</Link>
+              <Link to="/about" className="rounded-lg border border-white/20 px-6 py-3 text-sm font-bold text-white/80 transition-all hover:border-white/40 hover:text-white">About Venix</Link>
+            </div>
+          </div>
+
+          {/* Right: stat cards */}
+          <div className="relative hidden lg:flex flex-col gap-4 items-end">
+            <div className="_float rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 w-56 shadow-xl">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-yellow-400/70 mb-2">Service Model</p>
+              <p className="text-xl text-white" style={serif}>Advisory â†’ Build â†’ Operate</p>
+            </div>
+            <div className="rounded-2xl bg-blue-900/80 backdrop-blur-md border border-yellow-400/20 px-5 py-4 w-48 shadow-xl">
+              <p className="text-[9px] font-bold uppercase tracking-widest text-yellow-400 mb-1">Delivery</p>
+              <p className="text-base text-white" style={serif}>5 Service Lines</p>
+            </div>
+            <div className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 p-5 w-56 shadow-xl">
+              <div className="flex gap-4">
+                {[{n:'4',l:'Networks'},{n:'NCC',l:'Licensed'}].map(s => (
+                  <div key={s.l}>
+                    <p className="text-2xl text-yellow-400" style={serif}>{s.n}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-white/40">{s.l}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Industry tags */}
+        <div className="_r _d4 mt-14 flex flex-wrap gap-2">
+          <p className="mr-2 text-[11px] font-bold uppercase tracking-widest text-white/35 self-center">Industries Served:</p>
+          {industries.map(ind => (
+            <span key={ind} className="rounded-full border border-white/15 bg-white/8 px-3 py-1 text-[12px] font-medium text-white/70">{ind}</span>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S2: CORE SERVICES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S2CoreServices() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const services = [
+    { num:'01', icon:'ðŸ—‚ï¸', title:'Technical Project Management', sub:'Structured Oversight for Complex Digital Deployments', desc:'End-to-end technical project management for telecom integrations, fintech platform deployments, digital infrastructure rollouts, and enterprise system implementations.', scope:['Project feasibility analysis','Requirements gathering & documentation','Solution architecture coordination','Integration planning & validation','Vendor selection & management','Deployment supervision & go-live','Post-implementation monitoring'], img:'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'02', icon:'ðŸ§ ', title:'IT Consultancy', sub:'Strategic Advisory for Infrastructure Modernization', desc:'Strategic and operational IT consultancy to institutions seeking to modernize infrastructure, improve digital efficiency, or deploy scalable transaction frameworks grounded in practical deployment experience.', scope:['Digital transformation strategy','Telecom integration advisory','Enterprise systems architecture','Fintech infrastructure planning','API framework development','Cloud deployment advisory','Information security assessment'], img:'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'03', icon:'âš™ï¸', title:'IT Managed Services', sub:'Ongoing Infrastructure Operations & Stability', desc:'Structured IT managed services for organizations requiring reliable operational oversight â€” tailored to ensure system stability, transaction reliability, and infrastructure resilience.', scope:['Infrastructure monitoring & performance','API uptime tracking','Server & cloud administration','Security patch management','Firewall oversight','Incident response coordination','Transaction reporting & analytics'], img:'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'04', icon:'ðŸ“¡', title:'Telecom Infrastructure Deployment', sub:'Enterprise E-Top-Up & Transaction Systems', desc:'Through Venix Cloud and associated infrastructure layers, we support enterprise clients requiring airtime distribution, data provisioning, secure transaction routing, and API-based vending architecture.', scope:['Airtime distribution infrastructure','Data bundle provisioning','Secure transaction routing','Enterprise dashboard integration','API-based vending architecture','Telecom vendor whitelisting','Firewall-protected architecture'], img:'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'05', icon:'ðŸ’¬', title:'Messaging & Communication Infrastructure', sub:'Enterprise-Grade Communication Systems', desc:'Transactional and promotional messaging infrastructure designed for reliability and cost efficiency â€” suitable for financial institutions, e-commerce platforms, public sector entities, and enterprise clients.', scope:['Bulk SMS aggregation','Transactional messaging systems','Enterprise API integrations','Carrier route management','Delivery analytics & reporting','Telecom compliance alignment'], img:'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=800' },
+  ];
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <section ref={ref} className="overflow-hidden bg-white px-6 py-24">
+      <Container>
+        <div className="mb-14 text-center">
+          <Eyebrow>Core Services</Eyebrow>
+          <H2>Five Enterprise Service Lines</H2>
+          <p className="_r _d2 mx-auto max-w-lg text-[15px] font-light leading-relaxed text-blue-900/65">All services are delivered within regulated telecom frameworks and aligned with NCC VAS licensing requirements where applicable.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
+          {services.map((s, i) => (
+            <div key={s.num} className={`_r _d${Math.min(i+1,6)} group overflow-hidden rounded-2xl border border-blue-900/8 transition-all duration-300 hover:border-yellow-400/40 hover:shadow-xl hover:shadow-yellow-400/10 ${i === 4 ? 'lg:col-span-2 xl:col-span-1' : ''}`}>
+              <img src={s.img} alt={s.title} className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="p-6">
+                <div className="mb-3 flex items-center gap-3"><span className="text-2xl">{s.icon}</span><span className="text-[11px] font-bold uppercase tracking-widest text-yellow-500">{s.num}</span></div>
+                <h3 className="mb-1 text-xl font-semibold text-blue-900" style={serif}>{s.title}</h3>
+                <p className="mb-3 text-[12px] font-medium italic text-blue-900/50">{s.sub}</p>
+                <p className="mb-4 text-[13px] font-light leading-relaxed text-blue-900/70">{s.desc}</p>
+                <button onClick={() => setOpen(open === i ? null : i)} className="flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wider text-yellow-600 transition-colors hover:text-blue-900">{open === i ? 'Hide Scope â†‘' : 'View Scope â†’'}</button>
+                {open === i && (<ul className="mt-4 space-y-1.5 border-t border-blue-900/8 pt-4">{s.scope.map(item => (<li key={item} className="flex items-start gap-2 text-[13px] text-blue-900/65"><span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400" />{item}</li>))}</ul>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S3: INTEGRATED ADVANTAGE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S3Advantage() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const advantages = [
+    { icon:'ðŸ›ï¸', title:'Regulatory Licensing', desc:'NCC VAS licensed â€” enabling compliant telecom-integrated service delivery from day one.' },
+    { icon:'ðŸ”—', title:'Telecom Network Access', desc:'Active integrations with MTN, Airtel, Glo, and 9mobile via accredited VAS aggregator channels.' },
+    { icon:'ðŸ—ï¸', title:'Infrastructure Ownership', desc:'Proprietary platform infrastructure eliminates vendor dependency and accelerates deployment.' },
+    { icon:'ðŸš€', title:'Implementation Oversight', desc:'End-to-end delivery oversight from architecture through go-live across complex programmes.' },
+    { icon:'ðŸ”„', title:'Ongoing Operations', desc:'Long-term managed services ensuring sustained system stability beyond initial deployment.' },
+  ];
+  const outcomes = ['Continuity from advisory to execution','Reduced vendor fragmentation','Faster deployment cycles','Improved operational stability','Enhanced regulatory alignment'];
+  return (
+    <section ref={ref} className="relative overflow-hidden bg-blue-900 px-6 py-24">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage:'linear-gradient(rgba(251,191,36,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.04) 1px,transparent 1px)', backgroundSize:'56px 56px' }} />
+      <Container className="relative z-10">
+        <div className="mb-14 text-center">
+          <Eyebrow light>Integrated Service Advantage</Eyebrow>
+          <H2 light>Unlike Advisory-Only Firms, Venix Combines:</H2>
+          <p className="_r _d2 mx-auto max-w-xl text-[15px] font-light leading-relaxed text-white/55">Our model is designed to support institutions operating within high-volume, regulated digital environments.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 content-start">
+            {advantages.map((a, i) => (<div key={a.title} className={`_r _d${i+1} rounded-2xl border border-white/10 bg-white/4 p-5 transition-all hover:border-yellow-400/30 hover:bg-white/7 ${i===4 ? 'sm:col-span-2' : ''}`}><span className="mb-3 block text-2xl">{a.icon}</span><p className="mb-2 text-[13px] font-semibold text-yellow-100">{a.title}</p><p className="text-[12px] font-light leading-relaxed text-white/55">{a.desc}</p></div>))}
+          </div>
+          <div className="flex flex-col justify-center">
+            <h3 className="_r text-2xl text-yellow-100 mb-6" style={serif}>This Integrated Approach Ensures:</h3>
+            <ul className="_r _d1 space-y-4 mb-10">{outcomes.map(o => (<li key={o} className="flex items-center gap-3"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-[11px] font-bold text-blue-900">âœ“</span><span className="text-[15px] font-light text-white/75">{o}</span></li>))}</ul>
+            <div className="_r _d2 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-100 p-6">
+              <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-blue-900/55">Engagement Model</p>
+              <div className="grid grid-cols-2 gap-2">{['Fixed-scope contracts','Retainer advisory','Infrastructure deployment','Managed service frameworks','Strategic partnerships'].map(e => (<div key={e} className="flex items-center gap-2 text-[12px] font-medium text-blue-900"><span className="h-1.5 w-1.5 shrink-0 rounded-full bg-blue-900/40" />{e}</div>))}</div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S4: DELIVERY COMMITMENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S4Commitment() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  const commitments = [
+    { icon:'ðŸ—ï¸', title:'Infrastructure Reliability', desc:'Systems engineered for high-uptime, resilience, and sustained performance under transaction load.' },
+    { icon:'âš–ï¸', title:'Regulatory Compliance', desc:'All services aligned with NCC licensing conditions and applicable digital infrastructure regulations.' },
+    { icon:'ðŸ›¡ï¸', title:'Structured Risk Management', desc:'Proactive identification and mitigation of operational, technological, and market risk vectors.' },
+    { icon:'ðŸ“Š', title:'Transparent Reporting', desc:'Defined reporting frameworks delivering visibility across system performance and service metrics.' },
+    { icon:'â­', title:'Technical Excellence', desc:'Deployment practices governed by structured governance frameworks and engineering standards.' },
+    { icon:'ðŸŒ±', title:'Sustainable Operational Growth', desc:'Long-term partnership focus over short-term deployments â€” built for institutional longevity.' },
+  ];
+  return (
+    <section ref={ref} className="overflow-hidden px-6 py-24" style={{ background:'linear-gradient(135deg,#FBBF24 0%,#FEF3C7 100%)' }}>
+      <Container>
+        <div className="mb-14 text-center">
+          <Eyebrow>Delivery Commitment</Eyebrow>
+          <H2>Our Services Are Built for Long-Term Institutional Partnerships</H2>
+        </div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {commitments.map((c, i) => (<div key={c.title} className={`_r _d${Math.min(i+1,6)} rounded-2xl border border-blue-900/10 bg-white/70 p-6 transition-all hover:-translate-y-1 hover:border-yellow-400/50 hover:shadow-lg hover:shadow-yellow-400/10`}><span className="mb-4 block text-3xl">{c.icon}</span><p className="mb-2 text-[15px] font-semibold text-blue-900" style={serif}>{c.title}</p><p className="text-[13px] font-light leading-relaxed text-blue-900/65">{c.desc}</p></div>))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// â”€â”€ S5: CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function S5CTA() {
+  const ref = useRef<HTMLElement>(null);
+  useReveal(ref);
+  return (
+    <section ref={ref} className="relative overflow-hidden bg-blue-900 px-6 py-24">
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage:'linear-gradient(rgba(251,191,36,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.04) 1px,transparent 1px)', backgroundSize:'56px 56px' }} />
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div>
+            <Eyebrow light>Start an Engagement</Eyebrow>
+            <h2 className="_r _d1 mb-5 text-4xl leading-[1.1] text-yellow-100 lg:text-5xl" style={serif}>Ready to Deploy Enterprise-Grade Digital Infrastructure?</h2>
+            <p className="_r _d2 text-[15px] font-light leading-relaxed text-white/60">Whether you're a financial institution, fintech operator, telecom partner, or enterprise technology firm â€” Venix has the regulated infrastructure, technical depth, and network integrations to support your deployment.</p>
+          </div>
+          <div className="_r _d3 rounded-3xl border border-white/10 bg-white/5 p-8">
+            <p className="mb-6 text-[11px] font-bold uppercase tracking-widest text-yellow-400">For Enterprise Engagements, Include:</p>
+            <ul className="mb-8 space-y-2.5">{['Organization name & nature of business','Proposed scope of engagement','Expected transaction volume (if applicable)','Technical contact details','Regulatory considerations (if applicable)'].map(item => (<li key={item} className="flex items-start gap-2.5 text-[13px] text-white/65"><span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400" />{item}</li>))}</ul>
+            <div className="flex flex-wrap gap-3">
+              <Link to="/contact" className="rounded-lg bg-yellow-400 px-6 py-3 text-sm font-bold text-blue-900 transition-all hover:bg-yellow-300 hover:-translate-y-0.5">Send Enterprise Inquiry</Link>
+              <a href="mailto:hello@venixpartners.com" className="rounded-lg border border-white/20 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-yellow-400/40 hover:text-yellow-400">hello@venixpartners.com</a>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export default function ServicesPage() {
+  return <><S1Hero /><S2CoreServices /><S3Advantage /><S4Commitment /><S5CTA /></>;
+}
+
+=== TermsOfUsePage.tsx ===
+// â”€â”€â”€ TermsOfUsePage.tsx â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Container from '../components/ui/Container';
+
+function useReveal(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('_vis', e.isIntersecting)),
+      { threshold: 0.08 }
+    );
+    ref.current?.querySelectorAll('._r').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [ref]);
+}
+
+const CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  ._r { opacity:0; transform:translateY(20px); transition:opacity .65s ease,transform .65s ease; }
+  ._r._vis { opacity:1; transform:none; }
+  ._d1{transition-delay:.05s} ._d2{transition-delay:.1s}
+`;
+const serif = { fontFamily:"'DM Serif Display',Georgia,serif" } as const;
+const sans  = { fontFamily:"'DM Sans',sans-serif" } as const;
+
+const sections = [
+  { id:'acceptance',    label:'Acceptance of Terms' },
+  { id:'services',      label:'Description of Services' },
+  { id:'eligibility',   label:'Eligibility' },
+  { id:'access',        label:'Platform Access' },
+  { id:'conduct',       label:'Acceptable Use' },
+  { id:'ip',            label:'Intellectual Property' },
+  { id:'liability',     label:'Limitation of Liability' },
+  { id:'indemnity',     label:'Indemnification' },
+  { id:'termination',   label:'Termination' },
+  { id:'governing',     label:'Governing Law' },
+  { id:'disputes',      label:'Dispute Resolution' },
+  { id:'misc',          label:'Miscellaneous' },
+  { id:'contact',       label:'Contact' },
+];
+
+function SideNav({ active }: { active: string }) {
+  return (
+    <nav className="sticky top-28 hidden xl:block w-56 shrink-0">
+      <p style={{ ...sans, fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#FBBF24', marginBottom: 16 }}>On This Page</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {sections.map(s => (
+          <a key={s.id} href={`#${s.id}`} style={{ ...sans, fontSize: 13, fontWeight: active === s.id ? 600 : 400, color: active === s.id ? '#1E3A8A' : '#6B7280', padding: '6px 12px', borderRadius: 8, borderLeft: `2px solid ${active === s.id ? '#FBBF24' : 'transparent'}`, textDecoration: 'none', transition: 'all 0.15s', background: active === s.id ? 'rgba(251,191,36,0.08)' : 'transparent' }}>
+            {s.label}
+          </a>
+        ))}
+      </div>
+    </nav>
+  );
+}
+
+function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useReveal(ref as any);
+  return (
+    <div ref={ref} id={id} style={{ marginBottom: 56, scrollMarginTop: 100 }}>
+      <div className="_r" style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
+        <span style={{ display: 'block', height: 2, width: 24, background: '#FBBF24', flexShrink: 0 }} />
+        <h2 style={{ ...serif, fontSize: '1.5rem', color: '#1E3A8A', lineHeight: 1.2 }}>{title}</h2>
+      </div>
+      <div className="_r _d1">{children}</div>
+    </div>
+  );
+}
+
+function P({ children }: { children: React.ReactNode }) {
+  return <p style={{ ...sans, fontSize: 15, fontWeight: 300, lineHeight: 1.85, color: '#374151', marginBottom: 16 }}>{children}</p>;
+}
+function UL({ items }: { items: string[] }) {
+  return (
+    <ul style={{ margin: '0 0 16px', padding: 0, listStyle: 'none' }}>
+      {items.map(item => (
+        <li key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 8 }}>
+          <span style={{ marginTop: 8, height: 6, width: 6, borderRadius: '50%', background: '#FBBF24', flexShrink: 0 }} />
+          <span style={{ ...sans, fontSize: 14, fontWeight: 300, lineHeight: 1.7, color: '#374151' }}>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+function WarningBox({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ background: 'rgba(251,191,36,0.08)', border: '1px solid rgba(251,191,36,0.3)', borderRadius: 12, padding: '16px 20px', marginBottom: 20 }}>
+      <p style={{ ...sans, fontSize: 14, fontWeight: 400, lineHeight: 1.75, color: '#1E3A8A' }}>{children}</p>
+    </div>
+  );
+}
+function InfoBox({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ background: 'rgba(30,58,138,0.04)', border: '1px solid rgba(30,58,138,0.1)', borderRadius: 12, padding: '16px 20px', marginBottom: 20 }}>
+      <p style={{ ...sans, fontSize: 14, fontWeight: 300, lineHeight: 1.75, color: '#1E3A8A' }}>{children}</p>
+    </div>
+  );
+}
+
+export default function TermsOfUsePage() {
+  const [active, setActive] = useState('acceptance');
+
+  useEffect(() => {
+    const handler = () => {
+      for (const s of [...sections].reverse()) {
+        const el = document.getElementById(s.id);
+        if (el && el.getBoundingClientRect().top <= 140) { setActive(s.id); break; }
+      }
+    };
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  return (
+    <div style={{ ...sans, minHeight: '100vh', background: '#fff' }}>
+      <style>{CSS}</style>
+
+      {/* â”€â”€ HERO â”€â”€ */}
+      <div className="relative overflow-hidden bg-blue-950" style={{ paddingTop: 128, paddingBottom: 64, paddingLeft: 24, paddingRight: 24 }}>
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.98) 0%, rgba(30,58,138,0.6) 100%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(251,191,36,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(251,191,36,.03) 1px,transparent 1px)', backgroundSize: '56px 56px' }} />
+        <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, transparent, rgba(251,191,36,.6) 30%, rgba(251,191,36,.6) 70%, transparent)' }} />
+        <Container className="relative z-10">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(251,191,36,0.1)', border: '1.5px solid rgba(251,191,36,0.3)', borderRadius: 100, padding: '6px 16px', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#FBBF24', marginBottom: 24 }}>
+            ðŸ“„ Legal Â· Terms
+          </span>
+          <h1 style={{ ...serif, fontSize: 'clamp(2.4rem, 5vw, 4rem)', color: '#fff', lineHeight: 1.06, marginBottom: 16, maxWidth: 640 }}>
+            Terms of Use
+          </h1>
+          <p style={{ ...sans, fontSize: 15, fontWeight: 300, color: 'rgba(255,255,255,0.6)', maxWidth: 560, lineHeight: 1.8, marginBottom: 24 }}>
+            These Terms of Use govern your access to and use of all platforms, services, APIs, and digital products operated by Venix Partners Limited. Please read these terms carefully before using any of our services.
+          </p>
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+            <span style={{ ...sans, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.35)' }}>Effective Date: January 1, 2025</span>
+            <span style={{ ...sans, fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.35)' }}>Last Updated: March 2025</span>
+          </div>
+        </Container>
+      </div>
+
+      {/* â”€â”€ BODY â”€â”€ */}
+      <Container>
+        <div style={{ display: 'flex', gap: 64, paddingTop: 64, paddingBottom: 100, alignItems: 'flex-start' }}>
+          <SideNav active={active} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+
+            <Section id="acceptance" title="Acceptance of Terms">
+              <WarningBox>By accessing or using any platform, service, API, or system operated by Venix Partners Limited, you agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree, you must immediately discontinue use of all Venix services.</WarningBox>
+              <P>These Terms constitute a legally binding agreement between you (or your organisation) and Venix Partners Limited ("Venix", "we", "us"). These Terms apply to all users including enterprise clients, platform integrators, API consumers, and website visitors.</P>
+              <P>We reserve the right to update these Terms at any time. Continued use of our services following notification of changes constitutes acceptance of the revised Terms.</P>
+            </Section>
+
+            <Section id="services" title="Description of Services">
+              <P>Venix Partners Limited is a Nigerian telecom-integrated digital infrastructure company operating as an NCC-licensed Value Added Service (VAS) operator. Our services include but are not limited to:</P>
+              <UL items={[
+                'Venix Cloud â€” enterprise e-top-up, airtime distribution, and digital service aggregation',
+                'Mesaj â€” enterprise bulk SMS and transactional messaging infrastructure',
+                'BingeBay â€” mobile-first media streaming and content distribution',
+                'Turnaj â€” skill-based digital gaming and interactive competition platforms',
+                'FinSight â€” financial intelligence and digital analytics services',
+                'Technical Project Management, IT Consultancy, and Managed IT Services',
+                'API integrations and enterprise infrastructure solutions',
+              ]} />
+              <P>All services are subject to applicable NCC regulations, licensing conditions, and the operational framework of the relevant platform. Service availability may vary and is subject to change without prior notice.</P>
+            </Section>
+
+            <Section id="eligibility" title="Eligibility & Access">
+              <P>Use of Venix services is restricted to:</P>
+              <UL items={[
+                'Registered businesses and corporate entities operating lawfully within Nigeria or other jurisdictions we serve',
+                'Individuals who are at least 18 years of age and legally capable of entering binding agreements',
+                'Authorized representatives acting on behalf of eligible organisations',
+              ]} />
+              <P>Venix reserves the right to verify eligibility, request documentation, and deny or revoke access at its sole discretion. Services designed for business use are not available to individual consumers except where explicitly stated.</P>
+            </Section>
+
+            <Section id="access" title="Platform Access & Account Security">
+              <P>Where access credentials (API keys, account logins, or integration tokens) are issued to you or your organisation:</P>
+              <UL items={[
+                'You are solely responsible for maintaining the confidentiality and security of your credentials',
+                'You must immediately notify us of any unauthorised access, suspected breach, or credential compromise',
+                'You may not share, transfer, or sublicense access credentials without our prior written consent',
+                'All activity conducted through your credentials is your responsibility',
+                'We reserve the right to suspend access immediately upon suspicion of misuse or security breach',
+              ]} />
+              <InfoBox>API access is governed by additional technical documentation and usage agreements provided at the time of integration. Usage limits, rate limits, and SLA terms are specified in your enterprise agreement.</InfoBox>
+            </Section>
+
+            <Section id="conduct" title="Acceptable Use Policy">
+              <P>By using our services, you agree that you will not:</P>
+              <UL items={[
+                'Use our platforms for any unlawful, fraudulent, or deceptive purpose',
+                'Attempt to gain unauthorised access to any system, network, or data',
+                'Transmit spam, unsolicited messages, or communications that violate applicable laws',
+                'Reverse engineer, decompile, disassemble, or attempt to derive source code from our systems',
+                'Use our infrastructure to distribute malware, phishing content, or harmful code',
+                'Violate NCC regulations or any applicable telecommunications law',
+                'Use services in a manner that disproportionately burdens our infrastructure',
+                'Impersonate Venix, our staff, or any other person or entity',
+                'Facilitate, enable, or assist in any of the above activities',
+              ]} />
+              <P>Violation of this Acceptable Use Policy may result in immediate suspension or termination of access without liability to Venix, and may be reported to relevant authorities where applicable.</P>
+            </Section>
+
+            <Section id="ip" title="Intellectual Property">
+              <P>All intellectual property rights in and relating to Venix platforms, systems, software, APIs, documentation, branding, and content are and remain the exclusive property of Venix Partners Limited or its licensors.</P>
+              <UL items={[
+                'You are granted a limited, non-exclusive, non-transferable licence to access and use our services for your authorised business purposes',
+                'You may not copy, reproduce, modify, distribute, or exploit any part of our systems or content without express written consent',
+                'The Venix name, logo, platform names (Venix Cloud, Mesaj, BingeBay, Turnaj, FinSight), and associated marks are trademarks of Venix Partners Limited',
+                'Any feedback, suggestions, or ideas you provide to us may be used by us without restriction or compensation',
+              ]} />
+            </Section>
+
+            <Section id="liability" title="Limitation of Liability">
+              <WarningBox>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE NIGERIAN LAW, VENIX PARTNERS LIMITED SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF OR INABILITY TO USE OUR SERVICES.</WarningBox>
+              <P>Our total aggregate liability to you for any claim arising from these Terms or our services shall not exceed the amounts paid by you to Venix in the three (3) months immediately preceding the event giving rise to the claim.</P>
+              <P>We do not warrant that our services will be uninterrupted, error-free, or free from security vulnerabilities. Services are provided on an "as available" basis subject to our published SLA commitments where applicable.</P>
+            </Section>
+
+            <Section id="indemnity" title="Indemnification">
+              <P>You agree to indemnify, defend, and hold harmless Venix Partners Limited, its directors, officers, employees, agents, and partners from and against any claims, liabilities, damages, losses, and expenses (including legal fees) arising from:</P>
+              <UL items={[
+                'Your use of our services in violation of these Terms',
+                'Your violation of any applicable law or third-party rights',
+                'Your breach of any representations or warranties made under these Terms',
+                'Any content or data you transmit through our platforms',
+              ]} />
+            </Section>
+
+            <Section id="termination" title="Termination">
+              <P>Either party may terminate access to Venix services by providing written notice. Venix reserves the right to immediately suspend or terminate access without notice where:</P>
+              <UL items={[
+                'There is a material breach of these Terms',
+                'Continued access poses a security or compliance risk',
+                'Required by regulatory authority or court order',
+                'There is non-payment of agreed fees',
+                'There is evidence of fraudulent or unlawful activity',
+              ]} />
+              <P>Upon termination, all licences granted under these Terms cease immediately. Provisions relating to intellectual property, limitation of liability, indemnification, and governing law survive termination.</P>
+            </Section>
+
+            <Section id="governing" title="Governing Law">
+              <P>These Terms of Use are governed by and construed in accordance with the laws of the Federal Republic of Nigeria. By using our services, you submit to the jurisdiction of Nigerian courts for any dispute arising from these Terms.</P>
+              <P>Where our services are accessed from outside Nigeria, you remain responsible for compliance with all applicable local laws and regulations in your jurisdiction.</P>
+            </Section>
+
+            <Section id="disputes" title="Dispute Resolution">
+              <P>In the event of a dispute arising from or in connection with these Terms, the parties agree to first attempt resolution through good-faith negotiation within 30 days of written notice of the dispute.</P>
+              <P>If the dispute cannot be resolved through negotiation, the parties agree to submit to binding arbitration in Lagos, Nigeria under rules mutually agreed upon, or in the absence of agreement, under the Arbitration and Conciliation Act (Cap A18, Laws of the Federation of Nigeria). Nothing in this clause prevents either party from seeking urgent injunctive relief from a competent court.</P>
+            </Section>
+
+            <Section id="misc" title="Miscellaneous">
+              <UL items={[
+                'Entire Agreement â€” These Terms, together with any applicable enterprise agreement, constitute the entire agreement between you and Venix regarding your use of our services.',
+                'Severability â€” If any provision of these Terms is found unenforceable, the remaining provisions continue in full force.',
+                'Waiver â€” Failure to enforce any right under these Terms shall not constitute a waiver of that right.',
+                'Assignment â€” You may not assign your rights or obligations under these Terms without our prior written consent. We may assign our rights freely.',
+                'Force Majeure â€” Venix shall not be liable for delays or failures in performance resulting from events outside our reasonable control including natural disasters, regulatory action, or telecommunications outages.',
+              ]} />
+            </Section>
+
+            <Section id="contact" title="Contact">
+              <P>For queries relating to these Terms of Use, please contact:</P>
+              <div style={{ background: 'linear-gradient(135deg, #1E3A8A, #1e3a8a)', borderRadius: 16, padding: '28px 32px', marginTop: 8 }}>
+                <p style={{ ...serif, fontSize: '1.2rem', color: '#fde68a', marginBottom: 12 }}>Venix Partners Limited</p>
+                <p style={{ ...sans, fontSize: 14, fontWeight: 300, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}>
+                  Legal & Compliance<br />
+                  35, Yesufu Sanusi Street, Off Adeniran Ogunsanya<br />
+                  Surulere, Lagos, Nigeria<br /><br />
+                  <a href="mailto:hello@venixpartners.com" style={{ color: '#FBBF24', fontWeight: 500 }}>hello@venixpartners.com</a><br />
+                  Subject line: <em style={{ color: 'rgba(255,255,255,0.5)' }}>Terms of Use Enquiry</em>
+                </p>
+              </div>
+              <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(30,58,138,0.1)', display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <Link to="/privacy" style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none' }}>Privacy Policy â†’</Link>
+                <Link to="/compliance" style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none' }}>Compliance â†’</Link>
+                <Link to="/contact" style={{ ...sans, fontSize: 13, fontWeight: 600, color: '#1E3A8A', textDecoration: 'none' }}>Contact Us â†’</Link>
+              </div>
+            </Section>
+
+          </div>
+        </div>
+      </Container>
+    </div>
+  );
+}
