@@ -18,7 +18,7 @@ const slides = [
     image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=85",
     eyebrow: "Enterprise · Fintech · Telecom",
     title: ["Six Integrated", "Platform", "Verticals."],
-    description: "From cloud e-top-up and bulk messaging to content streaming, gaming, and financial intelligence — built for enterprise scale.",
+    description: "From cloud E-top up and bulk messaging to content streaming, gaming, and financial intelligence built for enterprise scale.",
     button: "View Our Platforms",
     buttonPath: "/platforms",
     tag: "Platform Ecosystem",
@@ -26,13 +26,13 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=85",
-    eyebrow: "Compliance-Driven · Regulated",
-    title: ["Structured for", "Long-Term", "Partnerships."],
-    description: "Disciplined engagement with telecom operators, financial institutions, and enterprise organizations — governed by NCC licensing standards.",
+    eyebrow: "Compliance Driven · Regulated",
+    title: ["Structured for", "Long Term", "Partnerships."],
+    description: "Disciplined engagement with telecom operators, financial institutions, and enterprise organizations governed by NCC licensing standards.",
     button: "Partner With Us",
     buttonPath: "/contact",
     tag: "Governance & Trust",
-    stat: { value: "B2B", label: "Enterprise-Grade" },
+    stat: { value: "B2B", label: "Enterprise Grade" },
   },
 ];
 

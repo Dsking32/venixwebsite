@@ -245,7 +245,7 @@ export default function CareersPage() {
             </h2>
 
             <p className="cp-sans" style={{ fontSize: 15, fontWeight: 300, lineHeight: 1.8, color: "#374151", marginBottom: 28 }}>
-              Thank you for your interest in joining Venix Partners Limited. We are not actively hiring at this time, but we are always growing — when new roles open up, we will post them here first.
+              Thank you for your interest in joining Venix Partners Limited. We are not actively hiring at this time, but we are always growing  when new roles open up, we will post them here first.
             </p>
 
             <p className="cp-sans" style={{ fontSize: 14, fontWeight: 300, lineHeight: 1.8, color: "#6B7280", marginBottom: 32 }}>
@@ -282,11 +282,11 @@ export default function CareersPage() {
           <div className="cp-perks-grid">
             {[
               { icon: "🌍", title: "Continental Impact",    desc: "Your work reaches millions of Nigerians and shapes the digital infrastructure of an entire continent."                },
-              { icon: "⚡", title: "Six Platform Verticals", desc: "Work across telecom, fintech, media, gaming, and AI — a rare breadth of technology in a single company."          },
-              { icon: "🏛️", title: "NCC Regulated",         desc: "We operate within Nigeria's regulatory framework, giving you stability, compliance, and long-term career security." },
-              { icon: "🤝", title: "Enterprise Networks",   desc: "Direct access to Nigeria's four major telecom operators — MTN, Airtel, Glo, and 9mobile."                          },
+              { icon: "⚡", title: "Six Platform Verticals", desc: "Work across telecom, fintech, media, gaming, and AI a rare breadth of technology in a single company."          },
+              { icon: "🏛️", title: "NCC Regulated",         desc: "We operate within Nigeria's regulatory framework, giving you stability, compliance, and long term career security." },
+              { icon: "🤝", title: "Enterprise Networks",   desc: "Direct access to Nigeria's four major telecom operators  MTN, Airtel, Glo, and 9mobile."                          },
               { icon: "📈", title: "Growth Focused",        desc: "We invest in our people. Every team member has a clear path to leadership as Venix expands across Africa."         },
-              { icon: "🔒", title: "Purposeful Work",       desc: "We're not building apps for fun — we're building the financial and digital rails that power everyday life."         },
+              { icon: "🔒", title: "Purposeful Work",       desc: "We're not building apps for fun  we're building the financial and digital rails that power everyday life."         },
             ].map((perk) => (
               <div key={perk.title} className="cp-perk-card">
                 <div className="cp-perk-icon">{perk.icon}</div>
@@ -310,9 +310,9 @@ export default function CareersPage() {
 
           <div className="cp-values-grid">
             {[
-              { title: "Integrity First",       desc: "We do the right thing, always — with clients, partners, and each other."            },
+              { title: "Integrity First",       desc: "We do the right thing, always  with clients, partners, and each other."            },
               { title: "Enterprise Excellence", desc: "We hold ourselves to the highest standards of quality, compliance, and delivery."    },
-              { title: "African Ambition",      desc: "We think continent-scale. Every decision we make is in service of a bigger vision."  },
+              { title: "African Ambition",      desc: "We think continent scale. Every decision we make is in service of a bigger vision."  },
               { title: "Collaborative Spirit",  desc: "We win together. The best ideas come from diverse minds working toward one goal."    },
               { title: "Builder Mentality",     desc: "We don't wait for permission. We identify problems, own solutions, and execute."     },
               { title: "Long-Term Thinking",    desc: "We build for decades, not quarters. Sustainability and discipline guide our growth." },

@@ -80,7 +80,7 @@ function S1Hero() {
               Building Africa's<br /><em style={{color:'#fde68a'}}>Digital Infrastructure</em>
             </h1>
             <p className="_r _d2 mb-8 max-w-lg text-lg font-light leading-relaxed text-white/65">
-              Venix Partners Limited is a Nigerian telecom-integrated digital infrastructure company operating within regulated VAS frameworks — incorporated to build structured, enterprise-grade digital systems for Nigeria's expanding transaction economy.
+              Venix Partners Limited is a Nigerian telecom integrated digital infrastructure company operating within regulated VAS frameworks incorporated to build structured, enterprise grade digital systems for Nigeria's expanding transaction economy.
             </p>
             <div className="_r _d3 flex flex-wrap gap-4">
               <Link to="/contact" className="rounded-lg bg-yellow-400 px-6 py-3 text-sm font-bold text-blue-950 shadow-lg shadow-yellow-400/25 transition-all hover:-translate-y-0.5 hover:bg-yellow-300">Partner With Us</Link>
@@ -136,8 +136,8 @@ function S2Overview() {
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
           <div>
             <Eyebrow>Corporate Overview</Eyebrow>
-            <H2>Infrastructure-Led. Compliance-Driven. Engineered for Scale.</H2>
-            <p className="_r _d2 mb-4 text-[15px] font-light leading-relaxed text-blue-900/70">Incorporated to build structured, enterprise-grade digital systems, Venix operates as a holding entity overseeing a diversified portfolio of infrastructure and platform businesses serving Nigeria's expanding transaction economy.</p>
+            <H2>Infrastructure Led. Compliance Driven. Engineered for Scale.</H2>
+            <p className="_r _d2 mb-4 text-[15px] font-light leading-relaxed text-blue-900/70">Incorporated to build structured, enterprise grade digital systems, Venix operates as a holding entity overseeing a diversified portfolio of infrastructure and platform businesses serving Nigeria's expanding transaction economy.</p>
             <p className="_r _d3 mb-6 text-[15px] font-light leading-relaxed text-blue-900/70">Through structured partnerships with MTN, Airtel, Globacom (Glo), and 9mobile (T2) via accredited VAS aggregator channels, the Company maintains compliant operational connectivity across multiple Nigerian telecom networks.</p>
             <div className="_r _d4 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-100 p-6">
               <p className="text-lg italic text-blue-900" style={serif}>"Our operational model is infrastructure-led, compliance-driven, and engineered for scale."</p>
@@ -147,7 +147,7 @@ function S2Overview() {
           <div>
             <Eyebrow>Our Evolution</Eyebrow>
             <H2>From VAS Operator to Digital Infrastructure Enterprise</H2>
-            <p className="_r _d2 mb-7 text-[15px] font-light leading-relaxed text-blue-900/70">As Nigeria's digital economy matured — increased mobile penetration, broadband expansion, fintech growth, rising transaction volumes — Venix strategically evolved beyond traditional VAS deployment into a broader infrastructure enterprise.</p>
+            <p className="_r _d2 mb-7 text-[15px] font-light leading-relaxed text-blue-900/70">As Nigeria's digital economy matured increased mobile penetration, broadband expansion, fintech growth, rising transaction volumes Venix strategically evolved beyond traditional VAS deployment into a broader infrastructure enterprise.</p>
             <ul className="_r _d3 space-y-3">
               {evolution.map(item => (
                 <li key={item} className="flex items-start gap-3">
@@ -169,12 +169,12 @@ function S3Architecture() {
   useReveal(ref);
   const [active, setActive] = useState(0);
   const layers = [
-    { num:'01', icon:'📡', title:'Core Telecom Infrastructure',   desc:'Enterprise e-top-up and digital service aggregation via Venix Cloud — built for high-volume airtime and data distribution across all major Nigerian networks.',              img:'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'01', icon:'📡', title:'Core Telecom Infrastructure',   desc:'Enterprise E-top up and digital service aggregation via Venix Cloud built for high volume airtime and data distribution across all major Nigerian networks.',              img:'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=900' },
     { num:'02', icon:'💳', title:'Fintech & Payment Distribution', desc:'Structured utility vending and digital payment workflows built for financial institutions, fintech operators, and enterprise clients requiring compliant transaction routing.',  img:'https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=900' },
-    { num:'03', icon:'💬', title:'Enterprise Messaging',           desc:"Transactional and promotional communication infrastructure at telecom scale — powering high-volume bulk messaging and enterprise notification systems via Mesaj.",            img:'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=900' },
-    { num:'04', icon:'🎬', title:'Media & Content Platforms',      desc:"Mobile-first streaming and content monetization systems designed for Africa's growing digital media consumption landscape via Bingebay.",                                       img:'https://images.pexels.com/photos/7989741/pexels-photo-7989741.jpeg?auto=compress&cs=tinysrgb&w=900' },
-    { num:'05', icon:'🎮', title:'Gaming & Interactive Platforms', desc:"Skill-based digital competitions and engagement platforms powering interactive gaming ecosystems across Nigerian and African markets via Turnaj.",                              img:'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=900' },
-    { num:'06', icon:'📊', title:'Data & Intelligence Services',   desc:"Financial insights and digital sector analytics enabling data-driven decision-making for enterprise clients in Nigeria's dynamic economy via Finsight.",                          img:'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'03', icon:'💬', title:'Enterprise Messaging',           desc:"Transactional and promotional communication infrastructure at telecom scale powering high volume bulk messaging and enterprise notification systems via Mesaj.",            img:'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'04', icon:'🎬', title:'Media & Content Platforms',      desc:"Mobile first streaming and content monetization systems designed for Africa's growing digital media consumption landscape via Bingebay.",                                       img:'https://images.pexels.com/photos/7989741/pexels-photo-7989741.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'05', icon:'🎮', title:'Gaming & Interactive Platforms', desc:"Skill based digital competitions and engagement platforms powering interactive gaming ecosystems across Nigerian and African markets via Turnaj.",                              img:'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=900' },
+    { num:'06', icon:'📊', title:'Data & Intelligence Services',   desc:"Financial insights and digital sector analytics enabling data driven decision-making for enterprise clients in Nigeria's dynamic economy via Finsight.",                          img:'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=900' },
   ];
   const benefits = ['Platform-level risk isolation','Regulatory clarity','Diversified revenue','Centralized IP governance','Shared infrastructure','Flexible capital allocation'];
   return (
@@ -183,7 +183,7 @@ function S3Architecture() {
         <div className="mb-14 text-center">
           <Eyebrow>Corporate Architecture</Eyebrow>
           <H2>Six Integrated Platform Layers</H2>
-          <p className="_r _d2 mx-auto max-w-lg text-[15px] font-light leading-relaxed text-blue-900/65">Venix operates as a holding company overseeing a layered digital infrastructure ecosystem — each layer within a defined operational framework, benefiting from centralized infrastructure oversight.</p>
+          <p className="_r _d2 mx-auto max-w-lg text-[15px] font-light leading-relaxed text-blue-900/65">Venix operates as a holding company overseeing a layered digital infrastructure ecosystem each layer within a defined operational framework, benefiting from centralized infrastructure oversight.</p>
         </div>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.45fr]">
           <div className="flex flex-col gap-1">
@@ -236,7 +236,7 @@ function S4Governance() {
         <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">
           <div>
             <Eyebrow light>Governance Framework</Eyebrow>
-            <H2 light>Structured for Long-Term Institutional Credibility</H2>
+            <H2 light>Structured for Long Term Institutional Credibility</H2>
             <p className="_r _d2 mb-10 text-[15px] font-light leading-relaxed text-white/60">Venix Partners Limited operates under structured corporate governance principles embedded within both infrastructure operations and enterprise service delivery.</p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               {governance.map((g, i) => (
@@ -251,7 +251,7 @@ function S4Governance() {
           <div>
             <Eyebrow light>Regulatory & Licensing</Eyebrow>
             <H2 light>NCC Licensed. Fully Compliant.</H2>
-            <p className="_r _d2 mb-8 text-[15px] font-light leading-relaxed text-white/60">Venix holds a Value Added Service (VAS) License issued by the Nigerian Communications Commission (NCC) — enabling structured and compliant deployment of telecom-based digital platforms.</p>
+            <p className="_r _d2 mb-8 text-[15px] font-light leading-relaxed text-white/60">Venix holds a Value Added Service (VAS) License issued by the Nigerian Communications Commission (NCC) enabling structured and compliant deployment of telecom-based digital platforms.</p>
             <div className="_r _d3 mb-8 flex items-center gap-4 rounded-2xl border border-yellow-400/20 bg-yellow-400/10 p-5">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-yellow-200 text-2xl">🏛️</div>
               <div>

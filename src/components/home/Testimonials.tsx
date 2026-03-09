@@ -122,7 +122,7 @@ export default function ContactPreview() {
             <h2 className="cp-contact-heading">Ready to Build on Africa's Digital Infrastructure?</h2>
             <p className="cp-contact-sub">
               Whether you're a financial institution, fintech operator, enterprise client, or
-              strategic partner — Venix has the regulated infrastructure, technical depth, and
+              strategic partner Venix has the regulated infrastructure, technical depth, and
               network integrations to power your growth.
             </p>
             <div className="cp-actions">

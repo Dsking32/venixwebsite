@@ -78,7 +78,7 @@ function S1Hero() {
               Enterprise<br /><em style={{color:'#fde68a'}}>Technology Services</em>
             </h1>
             <p className="_r _d2 mb-8 max-w-lg text-lg font-light leading-relaxed text-white/65">
-              Venix Partners Limited delivers structured infrastructure and technology services designed to support enterprise digital transformation, telecom integration, and high-volume transaction environments — from strategy through deployment.
+              Venix Partners Limited delivers structured infrastructure and technology services designed to support enterprise digital transformation, telecom integration, and high volume transaction environments from strategy through deployment.
             </p>
             <div className="_r _d3 flex flex-wrap gap-3">
               <Link to="/contact" className="rounded-lg bg-yellow-400 px-6 py-3 text-sm font-bold text-blue-950 shadow-lg shadow-yellow-400/25 transition-all hover:-translate-y-0.5 hover:bg-yellow-300">Discuss an Engagement</Link>
@@ -128,9 +128,9 @@ function S2CoreServices() {
   const services = [
     { num:'01', icon:'🗂️', title:'Technical Project Management', sub:'Structured Oversight for Complex Digital Deployments', desc:'End-to-end technical project management for telecom integrations, fintech platform deployments, digital infrastructure rollouts, and enterprise system implementations.', scope:['Project feasibility analysis','Requirements gathering & documentation','Solution architecture coordination','Integration planning & validation','Vendor selection & management','Deployment supervision & go-live','Post-implementation monitoring'], img:'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800' },
     { num:'02', icon:'🧠', title:'IT Consultancy', sub:'Strategic Advisory for Infrastructure Modernization', desc:'Strategic and operational IT consultancy to institutions seeking to modernize infrastructure, improve digital efficiency, or deploy scalable transaction frameworks grounded in practical deployment experience.', scope:['Digital transformation strategy','Telecom integration advisory','Enterprise systems architecture','Fintech infrastructure planning','API framework development','Cloud deployment advisory','Information security assessment'], img:'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800' },
-    { num:'03', icon:'⚙️', title:'IT Managed Services', sub:'Ongoing Infrastructure Operations & Stability', desc:'Structured IT managed services for organizations requiring reliable operational oversight — tailored to ensure system stability, transaction reliability, and infrastructure resilience.', scope:['Infrastructure monitoring & performance','API uptime tracking','Server & cloud administration','Security patch management','Firewall oversight','Incident response coordination','Transaction reporting & analytics'], img:'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800' },
-    { num:'04', icon:'📡', title:'Telecom Infrastructure Deployment', sub:'Enterprise E-Top-Up & Transaction Systems', desc:'Through Venix Cloud and associated infrastructure layers, we support enterprise clients requiring airtime distribution, data provisioning, secure transaction routing, and API-based vending architecture.', scope:['Airtime distribution infrastructure','Data bundle provisioning','Secure transaction routing','Enterprise dashboard integration','API-based vending architecture','Telecom vendor whitelisting','Firewall-protected architecture'], img:'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800' },
-    { num:'05', icon:'💬', title:'Messaging & Communication Infrastructure', sub:'Enterprise-Grade Communication Systems', desc:'Transactional and promotional messaging infrastructure designed for reliability and cost efficiency — suitable for financial institutions, e-commerce platforms, public sector entities, and enterprise clients.', scope:['Bulk SMS aggregation','Transactional messaging systems','Enterprise API integrations','Carrier route management','Delivery analytics & reporting','Telecom compliance alignment'], img:'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'03', icon:'⚙️', title:'IT Managed Services', sub:'Ongoing Infrastructure Operations & Stability', desc:'Structured IT managed services for organizations requiring reliable operational oversight tailored to ensure system stability, transaction reliability, and infrastructure resilience.', scope:['Infrastructure monitoring & performance','API uptime tracking','Server & cloud administration','Security patch management','Firewall oversight','Incident response coordination','Transaction reporting & analytics'], img:'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'04', icon:'📡', title:'Telecom Infrastructure Deployment', sub:'Enterprise E-Top-Up & Transaction Systems', desc:'Through Venix Cloud and associated infrastructure layers, we support enterprise clients requiring airtime distribution, data provisioning, secure transaction routing, and API based vending architecture.', scope:['Airtime distribution infrastructure','Data bundle provisioning','Secure transaction routing','Enterprise dashboard integration','API-based vending architecture','Telecom vendor whitelisting','Firewall-protected architecture'], img:'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800' },
+    { num:'05', icon:'💬', title:'Messaging & Communication Infrastructure', sub:'Enterprise-Grade Communication Systems', desc:'Transactional and promotional messaging infrastructure designed for reliability and cost efficiency suitable for financial institutions, e-commerce platforms, public sector entities, and enterprise clients.', scope:['Bulk SMS aggregation','Transactional messaging systems','Enterprise API integrations','Carrier route management','Delivery analytics & reporting','Telecom compliance alignment'], img:'https://images.pexels.com/photos/1591062/pexels-photo-1591062.jpeg?auto=compress&cs=tinysrgb&w=800' },
   ];
   const [open, setOpen] = useState<number | null>(null);
   return (
@@ -166,11 +166,11 @@ function S3Advantage() {
   const ref = useRef<HTMLElement>(null);
   useReveal(ref);
   const advantages = [
-    { icon:'🏛️', title:'Regulatory Licensing', desc:'NCC VAS licensed — enabling compliant telecom-integrated service delivery from day one.' },
+    { icon:'🏛️', title:'Regulatory Licensing', desc:'NCC VAS licensed enabling compliant telecom integrated service delivery from day one.' },
     { icon:'🔗', title:'Telecom Network Access', desc:'Active integrations with MTN, Airtel, Glo, and 9mobile via accredited VAS aggregator channels.' },
     { icon:'🏗️', title:'Infrastructure Ownership', desc:'Proprietary platform infrastructure eliminates vendor dependency and accelerates deployment.' },
     { icon:'🚀', title:'Implementation Oversight', desc:'End-to-end delivery oversight from architecture through go-live across complex programmes.' },
-    { icon:'🔄', title:'Ongoing Operations', desc:'Long-term managed services ensuring sustained system stability beyond initial deployment.' },
+    { icon:'🔄', title:'Ongoing Operations', desc:'Long term managed services ensuring sustained system stability beyond initial deployment.' },
   ];
   const outcomes = ['Continuity from advisory to execution','Reduced vendor fragmentation','Faster deployment cycles','Improved operational stability','Enhanced regulatory alignment'];
   return (
@@ -180,7 +180,7 @@ function S3Advantage() {
         <div className="mb-14 text-center">
           <Eyebrow light>Integrated Service Advantage</Eyebrow>
           <H2 light>Unlike Advisory-Only Firms, Venix Combines:</H2>
-          <p className="_r _d2 mx-auto max-w-xl text-[15px] font-light leading-relaxed text-white/55">Our model is designed to support institutions operating within high-volume, regulated digital environments.</p>
+          <p className="_r _d2 mx-auto max-w-xl text-[15px] font-light leading-relaxed text-white/55">Our model is designed to support institutions operating within high volume, regulated digital environments.</p>
         </div>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 content-start">
@@ -205,19 +205,19 @@ function S4Commitment() {
   const ref = useRef<HTMLElement>(null);
   useReveal(ref);
   const commitments = [
-    { icon:'🏗️', title:'Infrastructure Reliability', desc:'Systems engineered for high-uptime, resilience, and sustained performance under transaction load.' },
+    { icon:'🏗️', title:'Infrastructure Reliability', desc:'Systems engineered for high uptime, resilience, and sustained performance under transaction load.' },
     { icon:'⚖️', title:'Regulatory Compliance', desc:'All services aligned with NCC licensing conditions and applicable digital infrastructure regulations.' },
     { icon:'🛡️', title:'Structured Risk Management', desc:'Proactive identification and mitigation of operational, technological, and market risk vectors.' },
     { icon:'📊', title:'Transparent Reporting', desc:'Defined reporting frameworks delivering visibility across system performance and service metrics.' },
     { icon:'⭐', title:'Technical Excellence', desc:'Deployment practices governed by structured governance frameworks and engineering standards.' },
-    { icon:'🌱', title:'Sustainable Operational Growth', desc:'Long-term partnership focus over short-term deployments — built for institutional longevity.' },
+    { icon:'🌱', title:'Sustainable Operational Growth', desc:'Long term partnership focus over short term deployments  built for institutional longevity.' },
   ];
   return (
     <section ref={ref} className="overflow-hidden px-6 py-24" style={{ background:'linear-gradient(135deg,#FBBF24 0%,#FEF3C7 100%)' }}>
       <Container>
         <div className="mb-14 text-center">
           <Eyebrow>Delivery Commitment</Eyebrow>
-          <H2>Our Services Are Built for Long-Term Institutional Partnerships</H2>
+          <H2>Our Services Are Built for Long Term Institutional Partnerships</H2>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {commitments.map((c, i) => (<div key={c.title} className={`_r _d${Math.min(i+1,6)} rounded-2xl border border-blue-900/10 bg-white/70 p-6 transition-all hover:-translate-y-1 hover:border-yellow-400/50 hover:shadow-lg hover:shadow-yellow-400/10`}><span className="mb-4 block text-3xl">{c.icon}</span><p className="mb-2 text-[15px] font-semibold text-blue-900" style={serif}>{c.title}</p><p className="text-[13px] font-light leading-relaxed text-blue-900/65">{c.desc}</p></div>))}
@@ -238,8 +238,8 @@ function S5CTA() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
             <Eyebrow light>Start an Engagement</Eyebrow>
-            <h2 className="_r _d1 mb-5 text-4xl leading-[1.1] text-yellow-100 lg:text-5xl" style={serif}>Ready to Deploy Enterprise-Grade Digital Infrastructure?</h2>
-            <p className="_r _d2 text-[15px] font-light leading-relaxed text-white/60">Whether you're a financial institution, fintech operator, telecom partner, or enterprise technology firm — Venix has the regulated infrastructure, technical depth, and network integrations to support your deployment.</p>
+            <h2 className="_r _d1 mb-5 text-4xl leading-[1.1] text-yellow-100 lg:text-5xl" style={serif}>Ready to Deploy Enterprise Grade Digital Infrastructure?</h2>
+            <p className="_r _d2 text-[15px] font-light leading-relaxed text-white/60">Whether you're a financial institution, fintech operator, telecom partner, or enterprise technology firm Venix has the regulated infrastructure, technical depth, and network integrations to support your deployment.</p>
           </div>
           <div className="_r _d3 rounded-3xl border border-white/10 bg-white/5 p-8">
             <p className="mb-6 text-[11px] font-bold uppercase tracking-widest text-yellow-400">For Enterprise Engagements, Include:</p>

@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 
 const pillars = [
-  { icon: '📡', label: 'Enterprise E-Top-Up' },
+  { icon: '📡', label: 'Enterprise E-Top Up' },
   { icon: '💳', label: 'Fintech & Payments' },
   { icon: '💬', label: 'Messaging Systems' },
   { icon: '🎬', label: 'Media & Content' },
@@ -70,10 +70,10 @@ export default function WhoWeAre() {
             A Structured Digital Infrastructure Holding Company
           </h2>
           <p className="reveal d3 mb-4 text-[15px] font-light leading-relaxed text-blue-900/70">
-            Founded to build secure telecom-integrated digital systems, Venix Partners Limited has evolved from a mobile VAS provider into a broader infrastructure enterprise — structured for regulatory clarity, platform-level risk isolation, and scalable expansion across Africa.
+            Founded to build secure telecom integrated digital systems, Venix Partners Limited has evolved from a mobile VAS provider into a broader infrastructure enterprise structured for regulatory clarity, platform level risk isolation, and scalable expansion across Africa.
           </p>
           <p className="reveal d4 mb-8 text-[15px] font-light leading-relaxed text-blue-900/70">
-            Our operations span six verticals, each engineered to deliver enterprise-grade reliability and compliance within Nigeria's rapidly growing digital economy.
+            Our operations span six verticals, each engineered to deliver enterprise grade reliability and compliance within Nigeria's rapidly growing digital economy.
           </p>
 
           <div className="reveal d5 grid grid-cols-2 gap-3">

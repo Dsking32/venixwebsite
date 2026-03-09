@@ -45,7 +45,7 @@ function S1Hero() {
 
   const pillars = [
     { label: 'Regulated Telecom Connectivity' },
-    { label: 'Enterprise-Grade Infrastructure' },
+    { label: 'Enterprise Grade Infrastructure' },
     { label: 'Diversified Vertical Deployment' },
     { label: 'Controlled Risk Isolation' },
     { label: 'Scalable Transaction Routing' },
@@ -86,7 +86,7 @@ function S1Hero() {
               Structured Digital<br /><em style={{ color: '#fde68a' }}>Infrastructure</em>
             </h1>
             <p className="_r _d2 mb-8 max-w-lg text-lg font-light leading-relaxed text-white/65">
-              Venix Partners Limited operates a diversified portfolio of telecom-integrated digital platforms built on a layered infrastructure architecture — designed to combine regulated connectivity with enterprise-grade execution.
+              Venix Partners Limited operates a diversified portfolio of telecom integrated digital platforms built on a layered infrastructure architecture designed to combine regulated connectivity with enterprise grade execution.
             </p>
             <div className="_r _d3 flex flex-wrap gap-3">
               <Link to="/contact" className="rounded-lg bg-yellow-400 px-6 py-3 text-sm font-bold text-blue-950 shadow-lg shadow-yellow-400/25 transition-all hover:-translate-y-0.5 hover:bg-yellow-300">
@@ -146,8 +146,8 @@ function S2CoreInfra() {
     'Enterprise dashboard management',
     'Transaction monitoring and analytics',
     'Vendor API & IP whitelisting protocols',
-    'Firewall-protected deployment',
-    'High-uptime infrastructure architecture',
+    'Firewall protected deployment',
+    'High uptime infrastructure architecture',
   ];
 
   return (
@@ -168,7 +168,7 @@ function S2CoreInfra() {
               venix.cloud ↗
             </a>
             <p className="_r _d3 mb-6 text-[15px] font-light leading-relaxed text-blue-900/70">
-              Venix Cloud is the foundational infrastructure layer powering high-volume airtime and data distribution across Nigerian telecom networks. Designed as a B2B enterprise platform, it enables financial institutions, fintech operators, aggregators, and enterprise clients to integrate directly into regulated telecom frameworks through secure API architecture.
+              Venix Cloud is the foundational infrastructure layer powering high volume airtime and data distribution across Nigerian telecom networks. Designed as a B2B enterprise platform, it enables financial institutions, fintech operators, aggregators, and enterprise clients to integrate directly into regulated telecom frameworks through secure API architecture.
             </p>
             <div className="_r _d4 inline-flex items-center gap-2 rounded-xl border border-blue-900/10 bg-blue-900/4 px-4 py-3 mb-6">
               <span className="text-lg">🏗️</span>
@@ -229,7 +229,7 @@ function S3Platforms() {
       urlLabel: 'mesaj.cloud',
       color: 'from-blue-900 to-blue-950',
       accent: '#60a5fa',
-      desc: 'Mesaj provides enterprise-grade messaging infrastructure designed for regulated, high-reliability communication environments. The platform supports institutions requiring stable, cost-efficient, and compliant communication channels.',
+      desc: 'Mesaj provides enterprise grade messaging infrastructure designed for regulated, high reliability communication environments. The platform supports institutions requiring stable, cost efficient, and compliant communication channels.',
       capabilities: [
         'Bulk SMS aggregation',
         'Transactional messaging',
@@ -262,19 +262,19 @@ function S3Platforms() {
       category: 'Media & Digital Content',
       emoji: '🎬',
       name: 'BingeBay',
-      tagline: 'Mobile-First Streaming & Live Media Platform',
+      tagline: 'Mobile First Streaming & Live Media Platform',
       url: 'https://bingebay.tv',
       urlLabel: 'bingebay.tv',
       color: 'from-rose-900 to-rose-950',
       accent: '#fb7185',
-      desc: 'BingeBay is a digital streaming platform focused on African content distribution and mobile-first consumption models — expanding the Venix ecosystem into digital media distribution while leveraging telecom-integrated transaction capabilities.',
+      desc: 'BingeBay is a digital streaming platform focused on African content distribution and mobile first consumption models expanding the Venix ecosystem into digital media distribution while leveraging telecom integrated transaction capabilities.',
       capabilities: [
         'Video-on-demand streaming',
         'Live event broadcasting',
         'Creator monetisation',
         'Content licensing',
         'Advertising integrations',
-        'Mobile-first delivery',
+        'Mobile first delivery',
       ],
     },
     {
@@ -286,13 +286,13 @@ function S3Platforms() {
       urlLabel: 'turnaj.mobi',
       color: 'from-orange-900 to-orange-950',
       accent: '#fb923c',
-      desc: 'Turnaj is a skill-based interactive gaming platform focused on community engagement and structured competition. Built with regulatory awareness and localized engagement strategies tailored to African markets.',
+      desc: 'Turnaj is a skill based interactive gaming platform focused on community engagement and structured competition. Built with regulatory awareness and localized engagement strategies tailored to African markets.',
       capabilities: [
         'Fantasy sports tournaments',
-        'Skill-based competitions',
+        'Skill based competitions',
         'Structured prize mechanisms',
         'Digital payment integration',
-        'Community-driven engagement',
+        'Community driven engagement',
         'African market localization',
       ],
     },
@@ -305,13 +305,13 @@ function S3Platforms() {
       urlLabel: 'finsightngr.online',
       color: 'from-cyan-900 to-cyan-950',
       accent: '#22d3ee',
-      desc: 'FinSight provides structured financial and fintech sector insights designed for entrepreneurs, investors, and industry participants — expanding the Venix ecosystem into financial information services and market intelligence.',
+      desc: 'FinSight provides structured financial and fintech sector insights designed for entrepreneurs, investors, and industry participants expanding the Venix ecosystem into financial information services and market intelligence.',
       capabilities: [
         'Real-time fintech updates',
         'Sector news and intelligence',
         'Simplified financial analytics',
         'Subscription-based access',
-        'Mobile-first content delivery',
+        'Mobile first content delivery',
         'Market intelligence reports',
       ],
     },
@@ -485,7 +485,7 @@ function S4Architecture() {
               <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-yellow-400">Integrated Ecosystem Advantage</p>
               <h3 className="mb-4 text-3xl text-white" style={serif}>Shared Infrastructure. Independent Verticals.</h3>
               <p className="text-[15px] font-light leading-relaxed text-white/60">
-                While each platform operates within a defined vertical market, shared infrastructure coordination ensures efficiency across the entire ecosystem — positioning Venix as a long-term infrastructure participant rather than a single-product operator.
+                While each platform operates within a defined vertical market, shared infrastructure coordination ensures efficiency across the entire ecosystem positioning Venix as a long-term infrastructure participant rather than a single product operator.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -526,7 +526,7 @@ function S5Compliance() {
         <div className="mb-14 text-center">
           <Eyebrow light>Platform Governance</Eyebrow>
           <h2 className="_r _d1 mb-5 text-4xl leading-[1.1] text-yellow-50 lg:text-[2.75rem]" style={serif}>
-            Compliance-First Platform Operations
+            Compliance First Platform Operations
           </h2>
           <p className="_r _d2 mx-auto max-w-xl text-[15px] font-light leading-relaxed text-white/55">
             Infrastructure reliability and regulatory alignment remain foundational across all platform operations.
@@ -548,7 +548,7 @@ function S5Compliance() {
           <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-yellow-400">Ready to Integrate?</p>
           <h3 className="mb-4 text-3xl text-white" style={serif}>Access the Venix Platform Ecosystem</h3>
           <p className="mx-auto mb-8 max-w-lg text-[15px] font-light leading-relaxed text-white/55">
-            Whether you're a financial institution, fintech operator, or enterprise client — Venix has the regulated infrastructure and network integrations to support your deployment.
+            Whether you're a financial institution, fintech operator, or enterprise client Venix has the regulated infrastructure and network integrations to support your deployment.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/contact" className="rounded-lg bg-yellow-400 px-8 py-3 text-sm font-bold text-blue-950 transition-all hover:bg-yellow-300 hover:-translate-y-0.5">

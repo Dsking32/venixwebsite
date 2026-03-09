@@ -44,7 +44,7 @@ export default function EnterpriseServices() {
           <p className="reveal mb-3 text-[11px] font-bold uppercase tracking-[.12em] text-yellow-400">Enterprise & Professional Services</p>
           <h2 className="reveal d1 font-['DM_Serif_Display',Georgia,serif] text-4xl text-yellow-100 lg:text-5xl">Beyond Platform Ownership</h2>
           <p className="reveal d2 mx-auto mt-4 max-w-xl text-[15px] font-light leading-relaxed text-yellow-100/60">
-            Venix delivers structured enterprise technology services designed to support institutional digital transformation — combining ownership, expertise, and operations under one roof.
+            Venix delivers structured enterprise technology services designed to support institutional digital transformation combining ownership, expertise, and operations under one roof.
           </p>
         </div>
 
@@ -65,7 +65,7 @@ export default function EnterpriseServices() {
 
         {/* Differentiator strip */}
         <div className="reveal flex flex-wrap items-center gap-8 rounded-2xl bg-gradient-to-br from-yellow-400 to-yellow-100 p-8 lg:p-10">
-          <p className="font-['DM_Serif_Display',Georgia,serif] text-lg leading-snug text-blue-900 lg:max-w-[180px]">Unlike advisory-only firms, Venix combines:</p>
+          <p className="font-['DM_Serif_Display',Georgia,serif] text-lg leading-snug text-blue-900 lg:max-w-[180px]">Unlike advisory only firms, Venix combines:</p>
           <div className="flex flex-1 flex-wrap gap-3">
             {differentiators.map(d => (
               <span key={d} className="flex items-center gap-1.5 rounded-full border border-blue-900/15 bg-blue-900/10 px-4 py-2 text-[13px] font-semibold text-blue-900 before:content-['✓']">{d}</span>

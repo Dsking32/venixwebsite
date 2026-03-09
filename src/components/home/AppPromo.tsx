@@ -34,7 +34,7 @@ export default function PartnersMarquee() {
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-blue-900/55">
             Accredited VAS operator with live integrations across Nigeria's four major telecom
-            networks — and a growing suite of proprietary platforms.
+            networks and a growing suite of proprietary platforms.
           </p>
         </Container>
 

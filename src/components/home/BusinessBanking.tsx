@@ -11,9 +11,9 @@ const networks = [
 const capabilities = [
   { icon:'📶', title:'Airtime Distribution',  desc:'Programmatic airtime vending across all major Nigerian networks at enterprise scale.', img:'https://images.pexels.com/photos/4482896/pexels-photo-4482896.jpeg?auto=compress&cs=tinysrgb&w=600' },
   { icon:'📦', title:'Data Provisioning',      desc:'Automated data bundle provisioning for B2B clients and downstream distributors.',       img:'https://images.pexels.com/photos/6694543/pexels-photo-6694543.jpeg?auto=compress&cs=tinysrgb&w=600' },
-  { icon:'✉️', title:'Enterprise Messaging',   desc:'High-volume transactional and promotional messaging via direct telecom channels.',       img:'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600' },
-  { icon:'💰', title:'Content Monetization',   desc:'Telecom-integrated content billing and subscription management frameworks.',             img:'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=600' },
-  { icon:'🔄', title:'Transaction Routing',    desc:'Secure, real-time transaction routing within regulated telecom environments.',           img:'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { icon:'✉️', title:'Enterprise Messaging',   desc:'High volume transactional and promotional messaging via direct telecom channels.',       img:'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { icon:'💰', title:'Content Monetization',   desc:'Telecom integrated content billing and subscription management frameworks.',             img:'https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { icon:'🔄', title:'Transaction Routing',    desc:'Secure, real time transaction routing within regulated telecom environments.',           img:'https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=600' },
   { icon:'🛡️', title:'Compliance Assurance',   desc:'Full NCC regulatory alignment across all integration and operational touchpoints.',      img:'https://images.pexels.com/photos/5935791/pexels-photo-5935791.jpeg?auto=compress&cs=tinysrgb&w=600' },
 ];
 
@@ -74,7 +74,7 @@ export default function RegulatoryFoundation() {
               NCC Licensed. Telecom Integrated. Fully Compliant.
             </h2>
             <p className="reveal d2 mb-6 text-[15px] font-light leading-relaxed text-blue-900/70">
-              Venix Partners Limited holds a Value Added Service (VAS) License issued by the Nigerian Communications Commission — enabling structured and compliant deployment of telecom-based digital platforms across Nigeria.
+              Venix Partners Limited holds a Value Added Service (VAS) License issued by the Nigerian Communications Commission enabling structured and compliant deployment of telecom-based digital platforms across Nigeria.
             </p>
 
             {/* NCC block */}
